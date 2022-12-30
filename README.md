@@ -11,4 +11,5 @@ BakChat is a multipurpose & lightweight chat application written in nodeJS. BakC
 [Vandesm14 (original chat framework)](https://replit.com/@vandesm14)\
 [404 page by sarazond](https://codepen.io/sarazond/pen/jOKyjZ)
 ## Admin instructions
-Censored chat messages will not be sent
+*public logs are cleared on startup
+*Censored chat messages are logged to a public directory and will not be sent

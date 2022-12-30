@@ -1,0 +1,3 @@
+server(S)@12:17:14 2022-12-30:84978A has joined
+server(S)@12:17:14 2022-12-30:84978A is now known as testt
+server(S):@12:17:14 2022-12-30:testt has left

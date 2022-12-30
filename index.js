@@ -8,9 +8,6 @@ const cookieParser=require('cookie-parser');
 const path=require('path');
 const JSONdb = require('simple-json-db');
 const db=new JSONdb('db.json');
-const dns = require("dns");
-const tls = require('tls')
-const ip = require("ip");
 require('dotenv').config();
 
 
@@ -35,9 +32,6 @@ const logger = {
   "fatal":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#ff0000;background-color:#000000;font-family:monospace;">`+DandT()+`[FATAL]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[31m'+e+'\x1b[0m');},//fatal
 };
 
-
-
-//try{}catch(e){};
 
 // log tester
 logger.trace("Entering cheese testing");
@@ -73,8 +67,10 @@ function query(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),m
 function linez(str){var str_arr = str.split('\n');var newline_length = str_arr.length;return newline_length;}
 function RemoveFirstLine(text){var lines = text.split('\n');lines.splice(0,1);return lines.join('\n');}
 function queryKeys(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets;for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?Object.keys(ret):Object.keys(main)}
+
 makeFolder('./public/chatlogs');delFolder('./public/chatlogs');setTimeout(function(){makeFolder('./public/chatlogs')},50);
-setInterval(function(){bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){console.clear();if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+" ["+name+"] "+"\n"+bar+recentHistory);},500);
+
+  setInterval(function(){bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){console.clear();if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+" ["+name+"] "+"\n"+bar+recentHistory);},500);
 // setInterval(function(){},1000);
 
   io.on('connection',(socket) =>{
@@ -107,7 +103,7 @@ setInterval(function(){bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+
         name: 'server',
         message: 'Welcome to BakChat!<br> You are in room "'+socket.proto.room+'".<br>'+fs.readFileSync('assets/join_msg.txt')
       });
-      if(__DEVMODE){console.log(query({room:room}),socket.proto.room);}
+      if(fs.readFileSync('./config.json').DEVMODE){console.log(query({room:room}),socket.proto.room);}
       if (query({
         room: room
       }).length === 1 && socket.proto.room !== 'main'){
