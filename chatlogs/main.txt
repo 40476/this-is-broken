@@ -419,3 +419,17 @@ server(S):@19:17:44 2022-12-29:testt has left
 server(S)@12:17:14 2022-12-30:84978A has joined
 server(S)@12:17:14 2022-12-30:84978A is now known as testt
 server(S):@12:17:14 2022-12-30:testt has left
+server(S)@12:17:14 2022-12-30:2218C7 has joined
+server(S)@12:17:14 2022-12-30:2218C7 is now known as testt
+server(S):@12:17:14 2022-12-30:testt has left
+server(S)@14:29:9 2022-12-30:F9D6D3 has joined
+server(S)@14:29:9 2022-12-30:F9D6D3 is now known as testt
+server(S)@14:29:37 2022-12-30:4B6223 has joined
+server(S)@14:29:37 2022-12-30:4B6223 is now known as testt
+server(S)@14:32:35 2022-12-30:9F1A61 has joined
+server(S)@14:32:35 2022-12-30:9F1A61 is now known as testt
+server(S)@14:50:2 2022-12-30:198577 has joined
+server(S)@15:1:38 2022-12-30:E20A40 has joined
+server(S)@15:1:38 2022-12-30:E20A40 is now known as testt
+E20A40(testt)@15:1:38 2022-12-30:helllloo
+---874F21(874F21)@15:3:51 2022-12-30:fuck
