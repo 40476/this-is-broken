@@ -1,0 +1,5 @@
+/nick to set username<br>
+To join different room,type /join [room].<br>
+alt+a to open settings (option+A on mac)<br>
+Type /? to see commands<br>
+click the "CACHE" link to view chat logs to see what you missed<br>

@@ -1,0 +1,2 @@
+server(S)@18:51:49 2022-12-27:D1E7C3 has joined
+server(S):@18:51:49 2022-12-27:D1E7C3 has left

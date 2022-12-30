@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>initalizing...</title>
+    <style id="sheetControl">:root{--borderRad:0px;}</style>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+		<link rel="shortcut icon" href="images/fav.png" id="icon" />
+		<base target="_blank">
+  </head>
+  <body>
+<div id="myModal" class="modal"><div class="modal-content"><span class="close">&times;</span><p id="advert"></p></div></div>
+  <button onclick="openNav()"id="menuBTN"style="position:absolute;width:10px;border:none;height:100%;color:var(--theme_background);background-color:var(--theme_background);"></button>
+
+    <div id="mySidenav" class="sidenav">
+      <button class="closebtn" onclick="closeNav()">&times;</button><br><br>
+      
+      <button id='setting-button' onclick="light();">LIGHT</button>
+      <button  id='setting-button'onclick="dark();">DARK</button>
+      <button id='setting-button'onclick="ecomode();">ECO MODE</button>
+      <input id="borderRadius_control"type="number"value="0"min="0"max="60"style="width:40px">
+		  <div>audio notifications<input id="audio"type="checkbox"checked></div>
+      <div id="login">
+        username<br><input id="username"type="text">
+        password<br><input id="password"type="password">
+      </div>
+      <button onclick="settings();">apply</button>
+    </div>
+		<div class="app">
+			<div class="log" id="log">
+			</div>
+			<div class="box">
+				<div id="msg_wrapper"><p class="message" id="message" contenteditable="true"></p></div>
+      </div>
+		<template id="itemTemplate">
+			<div class="item {{type}} {{same}} load" id="{{id}}">
+				<p class="item-time">{{time}}</p>
+				<p class="item-name" style="background-color:{{oppcolor}};"data-color="{{color}}">{{name}}</p>
+				<p class="item-message">{{message}}</p>
+			</div>
+		</template>
+		<script src="socket.io/socket.io.js"></script>
+		<script>function ecomode(){document.write("<iframe src='"+document.location+"'width='100%'style='height:100%;'></iframe>");}</script><script>const css=`html{-webkit-filter:invert(100%);-moz-filter:invert(100%);-o-filter:invert(100%);-ms-filter:invert(100%);}`;const head=document.head;const style=document.createElement('style');style.type='text/css';if(style.styleSheet){style.styleSheet.cssText=css;}else{style.appendChild(document.createTextNode(css));}function light(){head.appendChild(style);}function dark(){head.removeChild(style);}</script>
+    <script src="assets/query.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
