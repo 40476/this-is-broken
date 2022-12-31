@@ -1,4 +1,4 @@
-# BakChat version 1.3.7 logging update
+# BakChat version 1.4.0 config update
 
 BakChat is a multipurpose & lightweight chat application written in nodeJS. BakChat has a very similar Ui and backbone compared to "LowChat", then I decided to make it better... AND LOOK AT IT NOW
 DONT FLAG ME FOR THE CUSSWORDS FILTER ON LINE 26
