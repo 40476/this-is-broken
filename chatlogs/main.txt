@@ -433,3 +433,15 @@ server(S)@15:1:38 2022-12-30:E20A40 has joined
 server(S)@15:1:38 2022-12-30:E20A40 is now known as testt
 E20A40(testt)@15:1:38 2022-12-30:helllloo
 ---874F21(874F21)@15:3:51 2022-12-30:fuck
+---735757(735757)@15:5:0 2022-12-30:shit
+---735757(735757)@15:5:0 2022-12-30:shit
+735757(735757)@15:5:0 2022-12-30:gfhgg
+735757(735757)@15:5:0 2022-12-30:f
+server(S):@15:5:0 2022-12-30:735757 has left
+server(S)@15:5:0 2022-12-30:AFAB15 has joined
+server(S)@15:5:0 2022-12-30:AFAB15 is now known as testt
+AFAB15(testt)@15:5:0 2022-12-30:h
+AFAB15(testt)@15:5:0 2022-12-30:f
+AFAB15(testt)@15:5:0 2022-12-30:gh
+AFAB15(testt)@15:5:0 2022-12-30:hg
+server(S):@15:5:0 2022-12-30:testt has left

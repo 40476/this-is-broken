@@ -10,7 +10,15 @@ const JSONdb = require('simple-json-db');
 const db=new JSONdb('db.json');
 require('dotenv').config();
 
-
+const config ={
+ "time":{
+  "zone":4,    
+ },
+ "rm_publicLogs_startup":true,
+ "DEVMODE":false,
+ "consoleRefreshRate":500,
+ "notAllowedWords":['fuck','shit','motherfucker','mothertrucker','Bastard','Bellend','Bloodclaat','Clunge','Minge','Punani','Pussy','Twat','Cunt','penis','vulva','vagina','sex','rape','cum','orgasm'],
+};
 
 // some stuff goes here or put your server address here
 var name=process.env.REPL_SLUG+"."+process.env.REPL_OWNER+".repl.co";
@@ -21,7 +29,7 @@ var name=process.env.REPL_SLUG+"."+process.env.REPL_OWNER+".repl.co";
 
 //--------------------------good grief, please forgive me---------------------------------
 var __timezoneoffset=6;
-let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-__timezoneoffset;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
+let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.zone;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
 function DandT(){return "["+year+"-"+month+"-"+date+"*"+hours+"."+minutes+"."+seconds+"]"} 
 
 const logger = {
@@ -37,22 +45,16 @@ const logger = {
 
 //const config =fs.readFileSync('./config.json');
 
-const config ={
- "rm_publicLogs_startup":true,
- "DEVMODE":false,
- "consoleRefreshRate":500,
- "notAllowedWords":['fuck','shit','motherfucker','mothertrucker','Bastard','Bellend','Bloodclaat','Clunge','Minge','Punani','Pussy','Twat','Cunt','penis','vulva','vagina','sex','rape','cum','orgasm'],
- 
-};
+
 
 
 // log tester
-logger.trace("Entering cheese testing");
-logger.debug("Got cheese.");
-logger.info("Cheese is Comté.");
-logger.warn("Cheese is quite smelly.");
-logger.error("Cheese is too ripe!");
-logger.fatal("Cheese was breeding ground for listeria.");
+// logger.trace("Entering cheese testing");
+// logger.debug("Got cheese.");
+// logger.info("Cheese is Comté.");
+// logger.warn("Cheese is quite smelly.");
+// logger.error("Cheese is too ripe!");
+// logger.fatal("Cheese was breeding ground for listeria.");
 //------------------------------------------------------------------------------------------
 
 
@@ -62,7 +64,7 @@ var version=fs.readFileSync('./public/assets/version.txt');
 var versionInfo=`BakChat version `+version+` -- as PID:`+process.pid+` on `+process.platform+`\n\n`+fs.readFileSync('assets/credits.txt')+`\n-------------------`;
 console.log(versionInfo);
 
-  /*I768*/var __DEVMODE=false,enablesend,placeholdervar,recentHistory="",bar="";
+  /*I768*/var enablesend,placeholdervar,recentHistory="",bar="";
 app.use(bodyParser.json());app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());app.use(express.static('public'));
 app.get('/',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
@@ -83,9 +85,8 @@ function linez(str){var str_arr = str.split('\n');var newline_length = str_arr.l
 function RemoveFirstLine(text){var lines = text.split('\n');lines.splice(0,1);return lines.join('\n');}
 function queryKeys(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets;for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?Object.keys(ret):Object.keys(main)}
 
-makeFolder('./public/chatlogs');delFolder('./public/chatlogs');setTimeout(function(){makeFolder('./public/chatlogs')},50);
-
-  setInterval(function(){bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){console.clear();if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+" ["+name+"] "+"\n"+bar+recentHistory);},500);
+if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./public/chatlogs');setTimeout(function(){makeFolder('./public/chatlogs')},50);}
+  setInterval(function(){bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){console.clear();if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+" ["+name+"] "+"\n"+bar+recentHistory);},config.consoleRefreshRate);
 // setInterval(function(){},1000);
 
   io.on('connection',(socket) =>{
