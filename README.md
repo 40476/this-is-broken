@@ -12,4 +12,5 @@ DONT FLAG ME FOR THE CUSSWORDS FILTER ON LINE 26
 [Vandesm14 (original chat framework)](https://replit.com/@vandesm14)\
 [404 page by sarazond](https://codepen.io/sarazond/pen/jOKyjZ)
 ## Admin instructions
-Censored chat messages will not be sent
+* Censored chat messages will not be sent
+* 
