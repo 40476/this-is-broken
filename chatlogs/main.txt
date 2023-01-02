@@ -6,3 +6,11 @@ server(S)@8:10:15 2023-01-02:811432 has joined
 server(S):@8:10:15 2023-01-02:811432 has left
 server(S)@8:10:15 2023-01-02:FC3497 has joined
 server(S):@8:10:15 2023-01-02:FC3497 has left
+server(S)@8:10:15 2023-01-02:2D92C1 has joined
+server(S)@8:10:15 2023-01-02:2D92C1 is now known as testt
+server(S)@8:10:15 2023-01-02:2D92C1 is now known as 40476
+2D92C1(40476)@8:10:15 2023-01-02:hello
+2D92C1(40476)@8:10:15 2023-01-02:this is test
+2D92C1(40476)@8:10:15 2023-01-02:*ing
+2D92C1(40476)@8:10:15 2023-01-02:dont use /help
+2D92C1(40476)@8:10:15 2023-01-02:use /?
