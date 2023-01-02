@@ -4,7 +4,7 @@ BakChat is a multipurpose & lightweight chat application written in nodeJS. BakC
 
 DONT FLAG ME FOR THE CUSSWORDS FILTER ON LINE 26
 ## Demo
-![Alt Text](demo.gif)
+![Alt Text](README/demo.gif)
 
 ## Developers:
 [@40476](https://replit.com/@40476) Lead Developer \
