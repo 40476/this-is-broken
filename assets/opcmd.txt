@@ -5,3 +5,5 @@
 /unmute [user]
 /ban [user]
 /unban [user]
+/restart
+/rr

@@ -10,7 +10,7 @@ const JSONdb = require('simple-json-db');
 const db=new JSONdb('db.json');
 require('dotenv').config();
 
-const config ={
+const config={
  "time":{
   "zone":6,    
  },
@@ -20,10 +20,13 @@ const config ={
  "rm_publicLogs_startup":true,
  "DEVMODE":false,
  "consoleRefreshRate":500,
- "notAllowedWords":['fuck','shit','motherfucker','mothertrucker','Bastard','Bellend','Bloodclaat','Clunge','Minge','Punani','Pussy','Twat','Cunt','penis','vulva','vagina','sex','rape','cum','orgasm'],
+ "chat":{
+  "notAllowedWords":['fuck','shit','motherfucker','mothertrucker','Bastard','Bellend','Bloodclaat','Clunge','Minge','Punani','Pussy','Twat','Cunt','penis','vulva','vagina','sex','rape','cum','orgasm'],
+  "disableTXTfilter":true, 
+ }
 };
 //TODO: get config from json file without parse errors
-//const config =fs.readFileSync('./config.json');
+//const config=fs.readFileSync('./config.json');
 
 //--------------------------good grief, please forgive me---------------------------------
 let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.zone;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
@@ -63,7 +66,7 @@ app.get('/',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
 app.get('/:room',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
 app.get('*',(req,res) =>{res.sendFile(__dirname+'/public/404.html');});
 http.listen(3000,()=> placeholdervar);              //it works trust me
-var cussWords=config.notAllowedWords;
+var cussWords=config.chat.notAllowedWords;
   //['fuck','shit','motherfucker','mothertrucker','Bastard','Bellend','Bloodclaat','Clunge','Minge','Punani','Pussy','Twat','Cunt','penis','vulva','vagina','sex','rape','cum','orgasm',];
 io.engine.generateId=(req)=>{return randHex(6);};
 var sha256=function r(o){function f(r,o){return r>>>o|r<<32-o}for(var t,n,a=Math.pow,c=a(2,32),e="length",i="",h=[],u=8*o[e],v=r.h=r.h||[],l=r.k=r.k||[],s=l[e],g={},k=2;s<64;k++)if(!g[k]){for(t=0;t<313;t+=k)g[t]=k;v[s]=a(k,.5)*c|0,l[s++]=a(k,1/3)*c|0}for(o+="";o[e]%64-56;)o+="\0";for(t=0;t<o[e];t++){if((n=o.charCodeAt(t))>>8)return;h[t>>2]|=n<<(3-t)%4*8}for(h[h[e]]=u/c|0,h[h[e]]=u,n=0;n<h[e];){var d=h.slice(n,n+=16),p=v;for(v=v.slice(0,8),t=0;t<64;t++){var w=d[t-15],A=d[t-2],C=v[0],M=v[4],A=v[7]+(f(M,6)^f(M,11)^f(M,25))+(M&v[5]^~M&v[6])+l[t]+(d[t]=t<16?d[t]:d[t-16]+(f(w,7)^f(w,18)^w>>>3)+d[t-7]+(f(A,17)^f(A,19)^A>>>10)|0);(v=[A+((f(C,2)^f(C,13)^f(C,22))+(C&v[1]^C&v[2]^v[1]&v[2]))|0].concat(v))[4]=v[4]+A|0}for(t=0;t<8;t++)v[t]=v[t]+p[t]|0}for(t=0;t<8;t++)for(n=3;n+1;n--){var S=v[t]>>8*n&255;i+=(S<16?0:"")+S.toString(16)}return i};
@@ -487,7 +490,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         if((message.includes('/key')!==true)&&(enablesend)){
 
           /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+message+'\n');}else if(message.includes('/key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+message+'\n');}
-      if(enablesend===true){
+      if((enablesend===true)||(config.chat.disableTXTfilter)){
         toRoom(socket.proto.room).emit('message',{
           name: socket.proto.name,
           message: message,
