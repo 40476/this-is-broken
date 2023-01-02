@@ -1,8 +1,3 @@
-server(S)@8:10:15 2023-01-02:6E4EEA has joined
-server(S)@8:10:15 2023-01-02:6E4EEA is now known as testt
----6E4EEA(testt)@8:10:15 2023-01-02:shit
-6E4EEA(testt)@8:10:15 2023-01-02:test completed
-server(S):@8:10:15 2023-01-02:testt has left
 server(S)@8:10:15 2023-01-02:715504 has joined
 server(S):@8:10:15 2023-01-02:715504 has left
 server(S)@8:10:15 2023-01-02:875D11 has joined
