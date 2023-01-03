@@ -1,6 +1,10 @@
 const express=require('express');
 const app=express();
 const http=require('http').Server(app);
+
+// configure to run iwth multiple ports --> https://stackoverflow.com/questions/19296797/running-node-js-http-server-on-multiple-ports
+
+
 const io=require('socket.io').listen(http);
 const bodyParser=require('body-parser');
 const fs=require('fs');
