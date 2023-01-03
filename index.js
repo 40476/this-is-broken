@@ -118,7 +118,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         name: 'server',
         message: 'Welcome to BakChat!<br> You are in room "'+socket.proto.room+'".<br>'+fs.readFileSync('assets/join_msg.txt')
       });
-      if(fs.readFileSync('./config.json').DEVMODE){console.log(query({room:room}),socket.proto.room);}
+      if(config.DEVMODE){console.log(query({room:room}),socket.proto.room);}
       if (query({
         room: room
       }).length === 1 && socket.proto.room !== 'main'){
