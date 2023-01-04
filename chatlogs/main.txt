@@ -29,3 +29,7 @@ server(S)@8:10:15 2023-01-02:0B519C is now known as 40476
 server(S):@8:10:15 2023-01-02:40476 has left
 server(S)@-6:23:8 2023-01-03:C9482C has joined
 server(S):@-6:23:8 2023-01-03:C9482C has left
+server(S)@-6:5:40 2023-01-04:1E600D has joined
+server(S):@-6:5:40 2023-01-04:1E600D has left
+server(S)@-6:20:35 2023-01-04:84E10B has joined
+5A6853(5A6853)@-6:21:19 2023-01-04:f

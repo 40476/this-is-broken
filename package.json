@@ -11,6 +11,7 @@
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
     "express": "latest",
+    "fetch": "^1.1.0",
     "fs": "0.0.1-security",
     "fs-extra": "^11.1.0",
     "ip": "^1.1.8",

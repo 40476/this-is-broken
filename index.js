@@ -4,7 +4,7 @@ const http=require('http').Server(app);
 
 // configure to run iwth multiple ports --> https://stackoverflow.com/questions/19296797/running-node-js-http-server-on-multiple-ports
 
-
+var fetchUrl = require("fetch").fetchUrl;
 const io=require('socket.io').listen(http);
 const bodyParser=require('body-parser');
 const fs=require('fs');
@@ -375,6 +375,11 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
+          case'/update':if(socket.proto.admin){
+              /* if user is admin*/
+            if(fs.readFileSync('./index.js')!==fetchUrl('https://raw.githubusercontent.com/40476/BakChat/main/index.js', function(){})){logger.warn('version mismatch')}
+            }else{}break;
+
           case '/msg':
             selectedSocket=query({
               name: message.split(' ')[1],
@@ -399,7 +404,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-            case'/rr':socket.emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});break;
+            // case'/rr':socket.emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});break;
           case '/key':
             if (message.split(' ')[1] === process.env.ADMIN){
               if (!socket.proto.admin){
