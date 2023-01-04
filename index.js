@@ -34,7 +34,7 @@ const config={
 
 //--------------------------good grief, please forgive me---------------------------------
 let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.zone;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
-function DandT(){return "["+year+"-"+month+"-"+date+"*"+hours+"."+minutes+"."+seconds+"]"} 
+function DandT(){return "["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"} 
 
 const logger = {
   "trace":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#00ee00;background-color:#000000;font-family:monospace;">`+DandT()+`[trace]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[32m'+e+'\x1b[0m');},//trace
@@ -54,7 +54,6 @@ logger.trace('server started')
 // logger.error("Cheese is too ripe!");
 // logger.fatal("Cheese was breeding ground for listeria.");
 //------------------------------------------------------------------------------------------
-
 
 if(true){
   
@@ -85,7 +84,7 @@ function RemoveFirstLine(text){var lines = text.split('\n');lines.splice(0,1);re
 function queryKeys(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets;for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?Object.keys(ret):Object.keys(main)}
 
 if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./public/chatlogs');setTimeout(function(){makeFolder('./public/chatlogs')},50);}
-  setInterval(function(){bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){console.clear();if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+"-"+(Date.now()-consoleLastRefresh)+" ["+config.server.name+"] "+"\n"+bar+recentHistory);consoleLastRefresh=Date.now()},config.consoleRefreshRate);
+  setInterval(function(){bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){console.clear();if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+"-{"+((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)+"}["+config.server.name+"] "+"\n"+bar+recentHistory);consoleLastRefresh=Date.now()},config.consoleRefreshRate);
 // setInterval(function(){},1000);
 
   io.on('connection',(socket) =>{
@@ -377,7 +376,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             break;
           case'/update':if(socket.proto.admin){
               /* if user is admin*/
-            if(fs.readFileSync('./index.js')!==fetchUrl('https://raw.githubusercontent.com/40476/BakChat/main/index.js', function(){})){logger.warn('version mismatch'+fetchUrl('https://raw.githubusercontent.com/40476/BakChat/main/index.js', function(){})+"\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+fs.readFileSync('./index.js'))}
+            if(fs.readFileSync('./index.js','utf8')!==fetchUrl('https://raw.githubusercontent.com/40476/BakChat/main/index.js', function(){})){logger.warn('version mismatch')}
             }else{}break;
 
           case '/msg':
