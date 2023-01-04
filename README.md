@@ -12,7 +12,7 @@ i know the readme is broken but it almost murdered my RAM since it was full HD ð
 
 ## Developers:
 [@40476](https://replit.com/@40476) Lead Developer \
-[@Durrwin](https://replit.com/@durrwin/portfolio?v=1) Ideas Person, Front End Designer, Developer, Media Manager
+[@Durrwin](https://replit.com/@durrwin) Ideas Person, Front End Designer, Developer, Media Manager
 ## Special Credits:
 [StackOverFlow](https://stackoverflow.com)\
 [W3schools](https://w3schools.com)\
