@@ -375,12 +375,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             break;
           case'/update':if(socket.proto.admin){
               /* if user is admin*/
-            var updatecode=request('https://raw.githubusercontent.com/40476/BakChat/main/index.js', { json: true }, (err, res, body) => {
-  if (err) { return console.log(err); }
-  console.log(body.url);
-  console.log(body.explanation);
-});
-            logger.fatal(updatecode);// fs.writeFileSync('index.js',updatecode)
+            //TODO: fetch updates from https://raw.githubusercontent.com/40476/BakChat/main/index.js
             }else{}break;
 
           case '/msg':
