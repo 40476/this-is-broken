@@ -1,12 +1,13 @@
+const initTime=Date.now();
 const express=require('express');
 const app=express();
 const http=require('http').Server(app);
-
-// configure to run iwth multiple ports --> https://stackoverflow.com/questions/19296797/running-node-js-http-server-on-multiple-ports
+const readline = require('readline').createInterface({input: process.stdin,output: process.stdout});
+//TODO: configure to run with multiple ports --> https://stackoverflow.com/questions/19296797/running-node-js-http-server-on-multiple-ports
 const request = require('request');
 const io=require('socket.io').listen(http);
 const bodyParser=require('body-parser');
-const fs=require('fs');
+const fs=require('fs');console.log(fs.readFileSync('./logo.txt','utf8'));
 const cookieParser=require('cookie-parser');
 const path=require('path');
 const JSONdb = require('simple-json-db');
@@ -18,7 +19,8 @@ const config={
   "zone":6,    
  },
  "server":{
-  "name":`https://`+process.env.REPL_SLUG+"."+process.env.REPL_OWNER+".repl.co",
+  "name":`bakchatfork.glitch.me`,
+ "manAuthStartup":false,
  },
  "rm_publicLogs_startup":true,
  "DEVMODE":false,
@@ -34,7 +36,6 @@ const config={
 //--------------------------good grief, please forgive me---------------------------------
 let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.zone;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
 function DandT(){return "["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"} 
-
 const logger = {
   "trace":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#00ee00;background-color:#000000;font-family:monospace;">`+DandT()+`[trace]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[32m'+e+'\x1b[0m');},//trace
   "debug":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#0022ff;background-color:#000000;font-family:monospace;">`+DandT()+`[debug]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[36m'+e+'\x1b[0m');},//debug
@@ -43,25 +44,18 @@ const logger = {
   "error":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#ad6e00;background-color:#000000;font-family:monospace;">`+DandT()+`[ERROR]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[93m'+e+'\x1b[0m');},//error
   "fatal":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#ff0000;background-color:#000000;font-family:monospace;">`+DandT()+`[FATAL]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[31m'+e+'\x1b[0m');},//fatal
 };
+
 logger.trace('server started')
 
-// log tester
-// logger.trace("Entering cheese testing");
-// logger.debug("Got cheese.");
-// logger.info("Cheese is Comté.");
-// logger.warn("Cheese is quite smelly.");
-// logger.error("Cheese is too ripe!");
-// logger.fatal("Cheese was breeding ground for listeria.");
-//------------------------------------------------------------------------------------------
 
-if(true){
+function SERV(){if(true){
   
 setTimeout(function(){
 var version=fs.readFileSync('./public/assets/version.txt');
 var versionInfo=`BakChat version `+version+` -- as PID:`+process.pid+` on `+process.platform+`\n\n`+fs.readFileSync('assets/credits.txt')+`\n-------------------`;
 console.log(versionInfo);
 
-  /*I768*/var enablesend,placeholdervar,recentHistory="",bar="",consoleLastRefresh;
+  /*I768*/var enablesend,placeholdervar,recentHistory="",bar="",consoleLastRefresh,shift="";
 app.use(bodyParser.json());app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());app.use(express.static('public'));
 app.get('/',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
@@ -71,7 +65,6 @@ http.listen(3000,()=> placeholdervar);              //it works trust me
 var cussWords=config.chat.notAllowedWords;
   //['fuck','shit','motherfucker','mothertrucker','Bastard','Bellend','Bloodclaat','Clunge','Minge','Punani','Pussy','Twat','Cunt','penis','vulva','vagina','sex','rape','cum','orgasm',];
 io.engine.generateId=(req)=>{return randHex(6);};
-var sha256=function r(o){function f(r,o){return r>>>o|r<<32-o}for(var t,n,a=Math.pow,c=a(2,32),e="length",i="",h=[],u=8*o[e],v=r.h=r.h||[],l=r.k=r.k||[],s=l[e],g={},k=2;s<64;k++)if(!g[k]){for(t=0;t<313;t+=k)g[t]=k;v[s]=a(k,.5)*c|0,l[s++]=a(k,1/3)*c|0}for(o+="";o[e]%64-56;)o+="\0";for(t=0;t<o[e];t++){if((n=o.charCodeAt(t))>>8)return;h[t>>2]|=n<<(3-t)%4*8}for(h[h[e]]=u/c|0,h[h[e]]=u,n=0;n<h[e];){var d=h.slice(n,n+=16),p=v;for(v=v.slice(0,8),t=0;t<64;t++){var w=d[t-15],A=d[t-2],C=v[0],M=v[4],A=v[7]+(f(M,6)^f(M,11)^f(M,25))+(M&v[5]^~M&v[6])+l[t]+(d[t]=t<16?d[t]:d[t-16]+(f(w,7)^f(w,18)^w>>>3)+d[t-7]+(f(A,17)^f(A,19)^A>>>10)|0);(v=[A+((f(C,2)^f(C,13)^f(C,22))+(C&v[1]^C&v[2]^v[1]&v[2]))|0].concat(v))[4]=v[4]+A|0}for(t=0;t<8;t++)v[t]=v[t]+p[t]|0}for(t=0;t<8;t++)for(n=3;n+1;n--){var S=v[t]>>8*n&255;i+=(S<16?0:"")+S.toString(16)}return i};
 function urmom(file) {db.set(file,{name:file});fs.appendFileSync('./public/logs.html','<a href="/../chatlogs/'+file+'">'+file+'</a><br>');}
 function Tolog(room,data){fs.appendFileSync('./public/chatlogs/'+room+'.txt',data);fs.appendFileSync('./chatlogs/'+room+'.txt',data)}
 function delFolder(dir){fs.readdir(dir, (err, files) => {if (err) throw err;for (let file of files) fs.unlink(dir+'/'+file,(err)=>{if (err) throw err;});return fs.rmdir(dir,(err) => {if (err) throw err;console.log('folder is deleted');});});}
@@ -81,9 +74,10 @@ function query(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),m
 function linez(str){var str_arr = str.split('\n');var newline_length = str_arr.length;return newline_length;}
 function RemoveFirstLine(text){var lines = text.split('\n');lines.splice(0,1);return lines.join('\n');}
 function queryKeys(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets;for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?Object.keys(ret):Object.keys(main)}
-
+makeFolder('./public/bans');
+  
 if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./public/chatlogs');setTimeout(function(){makeFolder('./public/chatlogs')},50);}
-  setInterval(function(){bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){console.clear();if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+"-{"+((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)+"}["+config.server.name+"] "+"\n"+bar+recentHistory);consoleLastRefresh=Date.now()},config.consoleRefreshRate);
+  setInterval(function(){if(((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)!==0){shift="🐌"}else{shift="✓";};bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){console.clear();if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+"-{"+((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)+" & "+Math.trunc((Date.now()-initTime)/1000)+"}["+config.server.name+"] "+shift+" "+"\n"+bar+recentHistory);consoleLastRefresh=Date.now();},config.consoleRefreshRate);
 // setInterval(function(){},1000);
 
   io.on('connection',(socket) =>{
@@ -94,13 +88,8 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
     let allsockets=io.of('/').sockets;
     defaults(allsockets,true);
     if (!Object.keys(allsockets).includes(room)){
-      socket.proto.room=room;
-      socket.proto.name=socket.id;
-      socket.proto.id=socket.id;
-      socket.proto.created=new Date();
-      socket.proto.admin=false;
-
-      rooms=Object.keys(allsockets).map(el => allsockets[el].proto.room);
+      socket.proto.room=room;socket.proto.name=socket.id;socket.proto.id=socket.id;socket.proto.created=new Date();socket.proto.admin=false;
+      
       socket.join(room);
       socket.emit('bounce',{
         type: 'join',
@@ -114,7 +103,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
       // fs.appendFileSync('./public/chatlogs/'+socket.proto.room+'.txt','server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${socket.proto.name} has joined`+'\n');
       socket.emit('message',{
         name: 'server',
-        message: 'Welcome to BakChat!<br> You are in room "'+socket.proto.room+'".<br>'+fs.readFileSync('assets/join_msg.txt')
+        message: 'Welcome to BakChat The server you are currently on is '+config.server.name+'!<br> You are in room "'+socket.proto.room+'".<br>'+fs.readFileSync('assets/join_msg.txt')
       });
       if(config.DEVMODE){console.log(query({room:room}),socket.proto.room);}
       if (query({
@@ -125,6 +114,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
           name: 'server',
           message: `${socket.proto.name} is now an admin`
         });
+        
       }
     } else{
       socket.emit('message',{
@@ -132,7 +122,6 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         message: `Error: "${room}" is a user (go back to <a href="/">main</a>?)`
       });
       socket.disconnect();
-      log(0);
     }
   });
 
@@ -425,7 +414,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             } 
             break;
-          case '/nick':
+          case '/name':
             if (message.split(' ')[1] && message.split(' ')[1].replace(0,0)){
               newname=message.split(' ')[1].replace(0,0).substr(0,30);
               if (queryKeys({
@@ -458,6 +447,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             }
             break;
           case '/?':
+            if(message.split(' ')[1]==='op'){fs.readFile('assets/opcmd.txt','utf8',(err,file) =>{socket.emit('message',{name: 'server',message: file});});}
             fs.readFile('assets/cmd.txt','utf8',(err,file) =>{
               socket.emit('message',{
                 name: 'server',
@@ -548,8 +538,7 @@ function occurences(arr){var prev,a=[],b=[];(arr=copy(arr)).sort();for(var i=0;i
 function toRoom(room){return{emit:(type,data)=>{let sockets=queryKeys({room:room});for(let i in sockets)io.to(sockets[i]).emit(type,data)}}}
 function formatHMS(time){let hours=Math.floor(time/1e3/60/60),minutes=Math.floor(time/1e3/60)%60,seconds=Math.floor(time/1e3)%60;return`${hours}h:${minutes<10?"0"+minutes:minutes}m:${seconds<10?"0"+seconds:seconds}s`}
 },2000);
-}
-// console.log("This is pid " + process.pid);
-// setTimeout(function () {
+}}
 
-// }, 5000);
+var sha256=function r(o){function f(r,o){return r>>>o|r<<32-o}for(var t,n,a=Math.pow,c=a(2,32),e="length",i="",h=[],u=8*o[e],v=r.h=r.h||[],l=r.k=r.k||[],s=l[e],g={},k=2;s<64;k++)if(!g[k]){for(t=0;t<313;t+=k)g[t]=k;v[s]=a(k,.5)*c|0,l[s++]=a(k,1/3)*c|0}for(o+="";o[e]%64-56;)o+="\0";for(t=0;t<o[e];t++){if((n=o.charCodeAt(t))>>8)return;h[t>>2]|=n<<(3-t)%4*8}for(h[h[e]]=u/c|0,h[h[e]]=u,n=0;n<h[e];){var d=h.slice(n,n+=16),p=v;for(v=v.slice(0,8),t=0;t<64;t++){var w=d[t-15],A=d[t-2],C=v[0],M=v[4],A=v[7]+(f(M,6)^f(M,11)^f(M,25))+(M&v[5]^~M&v[6])+l[t]+(d[t]=t<16?d[t]:d[t-16]+(f(w,7)^f(w,18)^w>>>3)+d[t-7]+(f(A,17)^f(A,19)^A>>>10)|0);(v=[A+((f(C,2)^f(C,13)^f(C,22))+(C&v[1]^C&v[2]^v[1]&v[2]))|0].concat(v))[4]=v[4]+A|0}for(t=0;t<8;t++)v[t]=v[t]+p[t]|0}for(t=0;t<8;t++)for(n=3;n+1;n--){var S=v[t]>>8*n&255;i+=(S<16?0:"")+S.toString(16)}return i};
+if(config.server.manAuthStartup===false){SERV()}else{readline.question('enter startup passcode:\n> ', function (name) {config.server.authVerify=name;readline.close();});readline.on('close', function () {try{if((config.server.manAuthStartup!==false)&&(sha256(config.server.authVerify)===config.server.manAuthStartup)){SERV()}}catch(e){logger.fatal(e)}});}

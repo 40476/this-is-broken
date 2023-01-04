@@ -1,2 +1,0 @@
-server(S):@5:27:58 2023-01-04:A14099 has left
-server(S):@5:27:58 2023-01-04:@A4C771 has left
