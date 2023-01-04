@@ -377,7 +377,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             break;
           case'/update':if(socket.proto.admin){
               /* if user is admin*/
-            if(fs.readFileSync('./index.js')!==fetchUrl('https://raw.githubusercontent.com/40476/BakChat/main/index.js', function(){})){logger.warn('version mismatch')}
+            if(fs.readFileSync('./index.js')!==fetchUrl('https://raw.githubusercontent.com/40476/BakChat/main/index.js', function(){})){logger.warn('version mismatch'+fetchUrl('https://raw.githubusercontent.com/40476/BakChat/main/index.js', function(){})+"\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+fs.readFileSync('./index.js'))}
             }else{}break;
 
           case '/msg':
