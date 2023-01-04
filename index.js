@@ -3,8 +3,7 @@ const app=express();
 const http=require('http').Server(app);
 
 // configure to run iwth multiple ports --> https://stackoverflow.com/questions/19296797/running-node-js-http-server-on-multiple-ports
-
-var fetchUrl = require("fetch").fetchUrl;
+const request = require('request');
 const io=require('socket.io').listen(http);
 const bodyParser=require('body-parser');
 const fs=require('fs');
@@ -376,8 +375,12 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             break;
           case'/update':if(socket.proto.admin){
               /* if user is admin*/
-            var updatecode=fetchUrl('https://raw.githubusercontent.com/40476/BakChat/main/index.js', function(){});
-            fs.writeFileSync('index.js',updatecode)
+            var updatecode=request('https://raw.githubusercontent.com/40476/BakChat/main/index.js', { json: true }, (err, res, body) => {
+  if (err) { return console.log(err); }
+  console.log(body.url);
+  console.log(body.explanation);
+});
+            logger.fatal(updatecode);// fs.writeFileSync('index.js',updatecode)
             }else{}break;
 
           case '/msg':
