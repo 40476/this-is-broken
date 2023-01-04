@@ -19,7 +19,7 @@ const config={
   "zone":6,    
  },
  "server":{
-  "name":process.env.REPL_SLUG+"."+process.env.REPL_OWNER+".repl.co",
+  "name":`https://`+process.env.REPL_SLUG+"."+process.env.REPL_OWNER+".repl.co",
  },
  "rm_publicLogs_startup":true,
  "DEVMODE":false,
@@ -44,7 +44,7 @@ const logger = {
   "error":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#ad6e00;background-color:#000000;font-family:monospace;">`+DandT()+`[ERROR]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[93m'+e+'\x1b[0m');},//error
   "fatal":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#ff0000;background-color:#000000;font-family:monospace;">`+DandT()+`[FATAL]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[31m'+e+'\x1b[0m');},//fatal
 };
-
+logger.trace('server started')
 
 // log tester
 // logger.trace("Entering cheese testing");
@@ -63,7 +63,7 @@ var version=fs.readFileSync('./public/assets/version.txt');
 var versionInfo=`BakChat version `+version+` -- as PID:`+process.pid+` on `+process.platform+`\n\n`+fs.readFileSync('assets/credits.txt')+`\n-------------------`;
 console.log(versionInfo);
 
-  /*I768*/var enablesend,placeholdervar,recentHistory="",bar="";
+  /*I768*/var enablesend,placeholdervar,recentHistory="",bar="",consoleLastRefresh;
 app.use(bodyParser.json());app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());app.use(express.static('public'));
 app.get('/',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
@@ -85,7 +85,7 @@ function RemoveFirstLine(text){var lines = text.split('\n');lines.splice(0,1);re
 function queryKeys(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets;for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?Object.keys(ret):Object.keys(main)}
 
 if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./public/chatlogs');setTimeout(function(){makeFolder('./public/chatlogs')},50);}
-  setInterval(function(){bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){console.clear();if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+" ["+config.server.name+"] "+"\n"+bar+recentHistory);},config.consoleRefreshRate);
+  setInterval(function(){bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){console.clear();if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+"-"+(Date.now()-consoleLastRefresh)+" ["+config.server.name+"] "+"\n"+bar+recentHistory);consoleLastRefresh=Date.now()},config.consoleRefreshRate);
 // setInterval(function(){},1000);
 
   io.on('connection',(socket) =>{
