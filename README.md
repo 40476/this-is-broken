@@ -1,3 +1,6 @@
+# i need help with update script (let me know in the discussions tab via github)
+
+
 # BakChat version 1.4.0 config update
 
 BakChat is a multipurpose & lightweight chat application written in nodeJS. BakChat has a very similar Ui and backbone compared to "LowChat", then I decided to make it better... AND LOOK AT IT NOW 
