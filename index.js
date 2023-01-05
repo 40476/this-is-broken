@@ -20,7 +20,7 @@ const config={
  },
  "server":{
   "name":`bakchatfork.glitch.me`,
- "manAuthStartup":'e30c2ea7a76f83b7c1a975ddc24286b675e714ebbbc72ccd5f0401730231ab57',
+ "manAuthStartup":false,
  },
  "rm_publicLogs_startup":true,
  "DEVMODE":false,
