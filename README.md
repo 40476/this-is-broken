@@ -6,9 +6,9 @@
 
 BakChat is a multipurpose & lightweight chat application written in nodeJS. BakChat has a very similar Ui and backbone compared to "LowChat", then I decided to make it better... AND LOOK AT IT NOW 
 
-DONT FLAG ME FOR THE CUSSWORDS FILTER ON LINE 26
+DONT FLAG ME FOR THE CUSSWORDS FILTER ON LINE 29
 ## Demo
-i know the readme is broken but it almost murdered my RAM since it was full HD 😂
+i know the video is broken but it almost murdered my RAM since it was full HD 😂
 ![Alt Text](README/demo.gif)
 
 ## Developers:

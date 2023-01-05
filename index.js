@@ -251,8 +251,16 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             }else{
               socket.emit('message',{name: 'server',message: `Error: Invalid credentials`}
             );}
-            break;
-
+          break;
+          case'/post':if(socket.proto.admin){
+            socket.emit('message',{
+            name:message.split(' ')[1],
+            room:room,
+            message:message.split(' ')[2]
+          });
+          }else{
+            socket.emit('message',{name:'server',message:`Error: Invalid credentials`});
+          }break;
           case '/deop':
             selectedSocket=query({
               name: message.split(' ')[1],
