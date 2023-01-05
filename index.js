@@ -267,7 +267,6 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                   name: 'server',
                   message: `${selectedSocket.proto.name} is no longer an admin`
                 });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${selectedSocket.proto.name} is no longer an admin`+'\n');
-                // fs.appendFileSync('./public/chatlogs/'+socket.proto.room+'.txt','server(S):@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${selectedSocket.proto.name} is no longer an admin`+'\n');
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -295,7 +294,6 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                   name: 'server',
                   message: `${selectedSocket.proto.name} is now an admin`
                 });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${selectedSocket.proto.name} is now an admin`+'\n');
-                // fs.appendFileSync('./public/chatlogs/'+socket.proto.room+'.txt','server(S):)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${selectedSocket.proto.name} is now an admin`+'\n');
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -431,7 +429,6 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 });
                 recentHistory=recentHistory+"\n"+hours+":"+minutes+":"+seconds+" "+':  '+`${name} is now known as ${socket.proto.name} ROOM --> ${socket.proto.room}`;
                 Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+`${name} is now known as ${socket.proto.name}`+'\n');
-                // fs.appendFileSync('./public/chatlogs/'+socket.proto.room+'.txt','server(S):)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${name} is now known as ${socket.proto.name}`+'\n');
               } else{
                 socket.emit('message',{
                   name: 'server',
