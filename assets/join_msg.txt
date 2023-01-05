@@ -1,4 +1,4 @@
-/nick to set username<br>
+/name to set username<br>
 /account to create an account<br>
 To join different room,type /join [room].<br>
 alt+a to open settings (option+A on mac)<br>
