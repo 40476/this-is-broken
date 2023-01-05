@@ -20,7 +20,7 @@ const config={
  },
  "server":{
   "name":`bakchatfork.glitch.me`,
- "manAuthStartup":false,
+ "manAuthStartup":'e30c2ea7a76f83b7c1a975ddc24286b675e714ebbbc72ccd5f0401730231ab57',
  },
  "rm_publicLogs_startup":true,
  "DEVMODE":false,
@@ -47,7 +47,6 @@ const logger = {
 
 logger.trace('server started')
 
-
 function SERV(){if(true){
   
 setTimeout(function(){
@@ -55,7 +54,7 @@ var version=fs.readFileSync('./public/assets/version.txt');
 var versionInfo=`BakChat version `+version+` -- as PID:`+process.pid+` on `+process.platform+`\n\n`+fs.readFileSync('assets/credits.txt')+`\n-------------------`;
 console.log(versionInfo);
 
-  /*I768*/var enablesend,placeholdervar,recentHistory="",bar="",consoleLastRefresh,shift="";
+  /*I768*/var enablesend,placeholdervar,recentHistory="",bar="",consoleLastRefresh;
 app.use(bodyParser.json());app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());app.use(express.static('public'));
 app.get('/',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
@@ -67,7 +66,7 @@ var cussWords=config.chat.notAllowedWords;
 io.engine.generateId=(req)=>{return randHex(6);};
 function urmom(file) {db.set(file,{name:file});fs.appendFileSync('./public/logs.html','<a href="/../chatlogs/'+file+'">'+file+'</a><br>');}
 function Tolog(room,data){fs.appendFileSync('./public/chatlogs/'+room+'.txt',data);fs.appendFileSync('./chatlogs/'+room+'.txt',data)}
-function delFolder(dir){fs.readdir(dir, (err, files) => {if (err) throw err;for (let file of files) fs.unlink(dir+'/'+file,(err)=>{if (err) throw err;});return fs.rmdir(dir,(err) => {if (err) throw err;console.log('folder is deleted');});});}
+function delFolder(dir){fs.readdir(dir, (err, files) => {if (err) throw err;for (let file of files) fs.unlink(dir+'/'+file,(err)=>{if (err) throw err;});return fs.rmdir(dir,(err) => {if (err) throw err;logger.trace('folder "'+dir+'" created')});});}
 function makeFolder(dir){!fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true });logger.trace('folder "'+dir+'" created')}
 function restart() {logger.fatal('admin command trigger-> restart');process.on("exit",function(){require("child_process").spawn(process.argv.shift(),process.argv,{cwd:process.cwd(),detached : true,stdio: "inherit"});});process.exit();}
 function query(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets,defaults(db,!0);for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?ret:main}
@@ -431,7 +430,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                   message: `${name} is now known as ${socket.proto.name}`,
                 });
                 recentHistory=recentHistory+"\n"+hours+":"+minutes+":"+seconds+" "+':  '+`${name} is now known as ${socket.proto.name} ROOM --> ${socket.proto.room}`;
-                Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${name} is now known as ${socket.proto.name}`+'\n');
+                Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+`${name} is now known as ${socket.proto.name}`+'\n');
                 // fs.appendFileSync('./public/chatlogs/'+socket.proto.room+'.txt','server(S):)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${name} is now known as ${socket.proto.name}`+'\n');
               } else{
                 socket.emit('message',{
@@ -486,7 +485,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         }
         if((message.includes('/key')!==true)&&(enablesend)){
 
-          /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+message+'\n');}else if(message.includes('/key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+message+'\n');}
+          /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+message+'\n');}else if(message.includes('/key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+message+'\n');}
       if((enablesend===true)||(config.chat.disableTXTfilter)){
         toRoom(socket.proto.room).emit('message',{
           name: socket.proto.name,
@@ -505,7 +504,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         message: `${socket.proto.name} has left`
       });
       recentHistory=recentHistory+"\n"+hours+":"+minutes+":"+seconds+" "+':  '+`${socket.proto.name} has left ${socket.proto.room}`;
-      Tolog(socket.proto.room,'server(S):@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${socket.proto.name} has left`+'\n');
+      Tolog(socket.proto.room,'server(S):@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+`${socket.proto.name} has left`+'\n');
       
     }
   });
