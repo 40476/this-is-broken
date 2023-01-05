@@ -19,7 +19,7 @@ const config={
   "zone":6,    
  },
  "server":{
-  "name":`bakchatfork.glitch.me`,
+  "name":`bakchat.40476.repl.co`,
  "manAuthStartup":false,
  },
  "rm_publicLogs_startup":true,
@@ -27,7 +27,8 @@ const config={
  "consoleRefreshRate":500,
  "chat":{
   "notAllowedWords":['fuck','shit','motherfucker','mothertrucker','Bastard','Bellend','Bloodclaat','Clunge','Minge','Punani','Pussy','Twat','Cunt','penis','vulva','vagina','sex','rape','cum','orgasm'],
-  "disableTXTfilter":true, 
+   "commandprefix":'/',
+   "disableTXTfilter":true, 
  }
 };
 //TODO: get config from json file without parse errors
@@ -136,7 +137,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
     
 
     if (message && !socket.proto.muted){
-      if (message[0] === '/'){
+      if (message[0] ===config.chat.commandprefix){
         let newname;
         let selectedSocket;
         let rooms;
@@ -144,13 +145,13 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
 
 
 
-          case'/account':
+          case config.chat.commandprefix+'account':
             
             fs.writeFileSync('./public/accounts/'+message.split(' ')[1]+'.txt',sha256(message.split(' ')[2]));
           break;
           /*credits*/case '/credits':socket.emit('message',{name: 'server',message: `BakChat version `+version+'<br><pre>'+fs.readFileSync('assets/credits.txt')+'</pre>'});break;
             //ban-----------------------------------------------------------------------------------------------
-          case '/ban':
+          case config.chat.commandprefix+'ban':
             selectedSocket=query({
               name: message.split(' ')[1],
               room: room
@@ -172,7 +173,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             }
             break;
             //unban-----------------------------------------------------------------------------------------------
-          case '/unban':
+          case config.chat.commandprefix+'unban':
             selectedSocket=query({
               name: message.split(' ')[1],
               room: room
@@ -186,7 +187,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             }
             break;
             //unban
-          case '/whois':
+          case config.chat.commandprefix+'whois':
             selectedSocket=query({
               name: message.split(' ')[1],
               id: message.split(' ')[1]
@@ -223,7 +224,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-          case '/kick':
+          case config.chat.commandprefix+'kick':
             selectedSocket=query({
               name: message.split(' ')[1],
               room: room
@@ -245,7 +246,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-          case'/restart'://barp
+          case config.chat.commandprefix+'restart'://barp
             if(socket.proto.admin){
               restart();
             }else{
@@ -261,7 +262,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
           }else{
             socket.emit('message',{name:'server',message:`Error: Invalid credentials`});
           }break;
-          case '/deop':
+          case config.chat.commandprefix+'deop':
             selectedSocket=query({
               name: message.split(' ')[1],
               room: room
@@ -288,7 +289,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-          case '/op':
+          case config.chat.commandprefix+'op':
             selectedSocket=query({
               name: message.split(' ')[1],
               room: room
@@ -315,7 +316,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-          case '/unmute':
+          case config.chat.commandprefix+'unmute':
             selectedSocket=query({
               name: message.split(' ')[1],
               room: room
@@ -341,7 +342,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-          case '/mute':
+          case config.chat.commandprefix+'mute':
             selectedSocket=query({
               name: message.split(' ')[1],
               room: room
@@ -367,12 +368,12 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-          case'/update':if(socket.proto.admin){
+          case config.chat.commandprefix+'update':if(socket.proto.admin){
               /* if user is admin*/
             //TODO: fetch updates from https://raw.githubusercontent.com/40476/BakChat/main/index.js
             }else{}break;
 
-          case '/msg':
+          case config.chat.commandprefix+'msg':
             selectedSocket=query({
               name: message.split(' ')[1],
               room: room
@@ -397,7 +398,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             }
             break;
             // case'/rr':socket.emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});break;
-          case '/key':
+          case config.chat.commandprefix+'key':
             if (message.split(' ')[1] === process.env.ADMIN){
               if (!socket.proto.admin){
                 socket.proto.admin=true;
@@ -419,7 +420,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             } 
             break;
-          case '/name':
+          case config.chat.commandprefix+'name':
             if (message.split(' ')[1] && message.split(' ')[1].replace(0,0)){
               newname=message.split(' ')[1].replace(0,0).substr(0,30);
               if (queryKeys({
@@ -450,7 +451,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-          case '/?':
+          case config.chat.commandprefix+'?':
             if(message.split(' ')[1]==='op'){fs.readFile('assets/opcmd.txt','utf8',(err,file) =>{socket.emit('message',{name: 'server',message: file});});}
             fs.readFile('assets/cmd.txt','utf8',(err,file) =>{
               socket.emit('message',{
@@ -459,7 +460,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             });
             break;
-          case '/users':
+          case config.chat.commandprefix+'users':
             socket.emit('message',{
               name: 'server',
               message: queryKeys({
@@ -467,8 +468,8 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               }).map(el => sockets[el].proto.name).join(',').replace(socket.proto.name,'<b>$&</b>')
             });
             break;
-            case'/logs':if(true){fs.readdir(path.resolve(__dirname,'./public/chatlogs/'),(err,files)=>{for(let file of files){urmom(file);}});socket.emit('message',{name:'server',message:'<a href="/../logs.html">logs</a>'});}break;
-          case '/rooms':
+          case config.chat.commandprefix+'logs':if(true){fs.readdir(path.resolve(__dirname,'./public/chatlogs/'),(err,files)=>{for(let file of files){urmom(file);}});socket.emit('message',{name:'server',message:'<a href="/../logs.html">logs</a>'});}break;
+          case config.chat.commandprefix+'rooms':
             rooms=occurences(Object.keys(allsockets).map(el => allsockets[el].proto.room));
             let users=rooms.b;
             rooms=rooms.a;
