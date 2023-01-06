@@ -27,8 +27,8 @@ const config={
  "consoleRefreshRate":500,
  "chat":{
   "notAllowedWords":['fuck','shit','motherfucker','mothertrucker','Bastard','Bellend','Bloodclaat','Clunge','Minge','Punani','Pussy','Twat','Cunt','penis','vulva','vagina','sex','rape','cum','orgasm'],
-   "commandprefix":'/',
    "disableTXTfilter":true, 
+   "commandprefix":'/',
  }
 };
 //TODO: get config from json file without parse errors
@@ -411,7 +411,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-            case'/rr':if (socket.proto.admin){socket.emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});}break;
+            case'/rr':if (socket.proto.admin){toRoom(room).emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});}break;
           case config.chat.commandprefix+'key':
             if (message.split(' ')[1] === process.env.ADMIN){
               if (!socket.proto.admin){

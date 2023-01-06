@@ -40,4 +40,17 @@ server(S)@5:31:23 2023-01-05:143EA9 has joined
 server(S)@5:31:23 2023-01-05:6E96D1 has joined
 143EA9(@143EA9)@5:31:23 01-05-2023:yoooooo it works
 143EA9(@143EA9)@5:31:23 01-05-2023:./post works
-F06CA2(F06CA2)@5:41:15 01-05-2023:/users
+F06CA2(F06CA2)@5:41:15 01-05-2023:/usersserver(S)@-5:10:10 2023-01-06:52AF63 has joined
+server(S):@-5:10:10 01-06-2023:52AF63 has left
+server(S)@-5:10:10 2023-01-06:D6990E has joined
+server(S):@-5:10:10 01-06-2023:D6990E has left
+server(S)@-5:10:10 2023-01-06:83804E has joined
+83804E(83804E)@-5:10:10 01-06-2023:re
+83804E(83804E)@-5:10:10 01-06-2023:e
+83804E(83804E)@-5:10:10 01-06-2023:e
+server(S):@-5:10:10 01-06-2023:83804E has left
+server(S)@-5:10:10 2023-01-06:DC5739 has joined
+server(S):@-5:10:10 01-06-2023:DC5739 has left
+server(S)@-5:10:10 2023-01-06:CC38B8 has joined
+server(S):@-5:10:10 01-06-2023:CC38B8 has left
+server(S)@-5:10:10 2023-01-06:E2713A has joined
