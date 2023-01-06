@@ -7,7 +7,6 @@
     <style id="sheetControl">:root{--borderRad:0px;}</style>
     <link href="style.css" rel="stylesheet" type="text/css" />
 		<link rel="shortcut icon" href="images/fav.png" id="icon" />
-		<base target="_blank">
   </head>
   <body>
 <div id="myModal" class="modal"><div class="modal-content"><span class="close">&times;</span><p id="advert"></p></div></div>
@@ -36,7 +35,8 @@
 		<template id="itemTemplate">
 			<div class="item {{type}} {{same}} load" id="{{id}}">
 				<p class="item-time">{{time}}</p>
-				<p class="item-name" style="background-color:{{oppcolor}};"data-color="{{color}}">{{name}}</p>
+<!--         <p class="item-platform">{{platform}}</p> -->
+				<p class="item-name"style="background-color:{{oppcolor}};"data-color="{{color}}">{{name}}</p>
 				<p class="item-message">{{message}}</p>
 			</div>
 		</template>

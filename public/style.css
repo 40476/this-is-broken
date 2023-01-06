@@ -4,13 +4,13 @@ html,body,.site,.app {
 margin:0;
 padding:0;
 width:100vw;
-height:100vh
+height:100vh;
+font-family:ubuntu;
+
 }
 
 body {
 background-color:#1f1f1f;
-color:#fff;
-font-family:ubuntu
 }
 
 div,h1,p {
@@ -31,25 +31,32 @@ flex-direction:column
 margin:6px auto;
 padding:10px;
 width:94%;
-background-color:#000;
-border-radius:var(--borderRad)
+background-color:#000000;
+border-radius:var(--borderRad);
+display:flex;
+overflow-y:scroll;
+flex-direction:column;
+flex-grow:1;
+overflow-wrap:break-word;
+  
 }
 
 .message {
 margin:6px auto;
 padding:10px;
 width:94%;
+  color:white;
 background-color:#000;
 border-radius:var(--borderRad)
 }
 
-.log {
+/* .log {
 display:flex;
 overflow-y:scroll;
 flex-direction:column;
 flex-grow:1;
 overflow-wrap:break-word
-}
+} */
 
 .item {
 background-color:#bfd4f3;
@@ -70,24 +77,21 @@ opacity:0;
 transform:scale(0)
 }
 
-.item.same {
-margin-top:-3px
-}
+.item.same {margin-top:-3px;}
+.item.me {background-color:#fff79e}
 
-.item.me {
-background-color:#fff79e
-}
-
-.item > p {
-display:inline
-}
+.item>p{display:inline}
 
 .item-time {
 color:gray;
 font-size:13px;
-margin-right:4px
+margin-right:4px;
 }
-
+.item-platform {
+color:gray;
+font-size:9px;
+margin-right:4px;
+}
 .item-name {
 font-weight:900;
 color:#008a22
@@ -217,7 +221,8 @@ position:fixed;
 z-index:1;
 top:0;
 left:0;
-background-color:#111;
+background-color:#111111;
+color:#FFFFFF;
 overflow-x:hidden;
 padding-top:60px;
 transition:.5s

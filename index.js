@@ -87,7 +87,17 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
     let allsockets=io.of('/').sockets;
     defaults(allsockets,true);
     if (!Object.keys(allsockets).includes(room)){
-      socket.proto.room=room;socket.proto.name=socket.id;socket.proto.id=socket.id;socket.proto.created=new Date();socket.proto.admin=false;
+      socket.proto.room=room;
+      socket.proto.name=socket.id;
+      socket.proto.platform=socket.platform;/*688*///logger.error(socket.platform);
+      socket.proto.id=socket.id;
+      socket.proto.created=new Date();
+      socket.proto.admin=false;
+      
+      
+      
+      
+      
       
       socket.join(room);
       socket.emit('bounce',{
@@ -101,6 +111,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
       Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${socket.proto.name} has joined`+'\n');
       // fs.appendFileSync('./public/chatlogs/'+socket.proto.room+'.txt','server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${socket.proto.name} has joined`+'\n');
       socket.emit('message',{
+        platform:'nodeJS',
         name: 'server',
         message: 'Welcome to BakChat The server you are currently on is '+config.server.name+'!<br> You are in room "'+socket.proto.room+'".<br>'+fs.readFileSync('assets/join_msg.txt')
       });
@@ -128,6 +139,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
     defaults(socket);
     let message=data.message.substr(0,500);
     let name=socket.proto.id;
+    let platform= socket.proto.platform;/*logger.fatal(platform)*/
     let sockets=query({room:socket.proto.room});
 
     let allsockets=io.of('/').sockets;
@@ -185,7 +197,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               socket.emit('message',{name:'server',message:`Error: Invalid credentials`});
             }
             break;
-            //unban
+            //whois------------------------------------------------------------------------------------------------
           case config.chat.commandprefix+'whois':
             selectedSocket=query({
               name: message.split(' ')[1],
@@ -205,7 +217,8 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 message: `<br>${selectedSocket.proto.id} is ${selectedSocket.proto.name}<br>
 								${selectedSocket.proto.name} is in ${rooms.length} room${rooms.length > 1 ? 's' : ''}: ${rooms.join(',')}<br>
 								Online for: ${formatHMS(new Date() - selectedSocket.proto.created)}<br>
-								Admin: ${selectedSocket.proto.admin}`
+								Admin: ${selectedSocket.proto.admin}
+                <!--platform: -->`
               });
             }else if(message.split(' ')[1] && message.split(' ')[1].indexOf('#') === 0){
               selectedSocket=query({
@@ -386,17 +399,19 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 type: 'direct'
               });
               socket.emit('message',{
+                platform:'nodeJS',
                 name: 'server',
                 message: `Message sent to ${message.split(' ')[1]}`
               });
             } else{
               socket.emit('message',{
+                platform:'nodeJS',
                 name: 'server',
                 message: `Error: User ${message.split(' ')[1]} does not exist`
               });
             }
             break;
-            // case'/rr':socket.emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});break;
+            case'/rr':if (socket.proto.admin){socket.emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});}break;
           case config.chat.commandprefix+'key':
             if (message.split(' ')[1] === process.env.ADMIN){
               if (!socket.proto.admin){
@@ -495,7 +510,8 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         toRoom(socket.proto.room).emit('message',{
           name: socket.proto.name,
           message: message,
-          color: socket.proto.id
+          color: socket.proto.id,
+          platform:platform
         });}
         }
         enablesend=true;

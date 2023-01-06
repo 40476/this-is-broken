@@ -1,6 +1,6 @@
 function settings(){
   document.documentElement.style.setProperty("--borderRad",document.getElementById('borderRadius_control').value+'px');
-  fetch('accounts/'+document.getElementById('username').value+'.txt').then(response=>response.text()).then(psk=>{if(sha256(document.getElementById('password').value)===psk){localStorage.setItem('username',document.getElementById('username').value);client.emit('message',{message:`/nick ${localStorage.getItem('username')}`});}else{alert('invalid login\n'+psk+'\n'+sha256(document.getElementById('password').value))}});
+  fetch('accounts/'+document.getElementById('username').value+'.txt').then(response=>response.text()).then(psk=>{if(sha256(document.getElementById('password').value)===psk){localStorage.setItem('username',document.getElementById('username').value);client.emit('message',{message:`/name ${localStorage.getItem('username')}`});}else{alert('invalid login\n'+psk+'\n'+sha256(document.getElementById('password').value))}});
   // fetch('accounts/'+document.getElementById('username').value+'.txt').then(response=>response.text()).then(psk=>{if(sha256(document.getElementById('password').value)===psk){loginstatus=true;}else{loginstatus=false;}return loginstatus});
 }
 function fileExists(url) {
@@ -15,7 +15,7 @@ function fileExists(url) {
 }
 function hexToRgb(hex) {var validHEXInput=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);if(!validHEXInput) {return false;}var output = {r: parseInt(validHEXInput[1], 16),g: parseInt(validHEXInput[2], 16),b: parseInt(validHEXInput[3], 16),};return output;}
 function randInt(min, max){return Math.floor(Math.random() * (max - min + 1)) + min;}
-var version,__osc=1,loginstatus;
+var version,__osc=1,loginstatus,platform=navigator.platform;
 var sha256=function r(o){function f(r,o){return r>>>o|r<<32-o}for(var t,n,a=Math.pow,c=a(2,32),e="length",i="",h=[],u=8*o[e],v=r.h=r.h||[],l=r.k=r.k||[],s=l[e],g={},k=2;s<64;k++)if(!g[k]){for(t=0;t<313;t+=k)g[t]=k;v[s]=a(k,.5)*c|0,l[s++]=a(k,1/3)*c|0}for(o+="";o[e]%64-56;)o+="\0";for(t=0;t<o[e];t++){if((n=o.charCodeAt(t))>>8)return;h[t>>2]|=n<<(3-t)%4*8}for(h[h[e]]=u/c|0,h[h[e]]=u,n=0;n<h[e];){var d=h.slice(n,n+=16),p=v;for(v=v.slice(0,8),t=0;t<64;t++){var w=d[t-15],A=d[t-2],C=v[0],M=v[4],A=v[7]+(f(M,6)^f(M,11)^f(M,25))+(M&v[5]^~M&v[6])+l[t]+(d[t]=t<16?d[t]:d[t-16]+(f(w,7)^f(w,18)^w>>>3)+d[t-7]+(f(A,17)^f(A,19)^A>>>10)|0);(v=[A+((f(C,2)^f(C,13)^f(C,22))+(C&v[1]^C&v[2]^v[1]&v[2]))|0].concat(v))[4]=v[4]+A|0}for(t=0;t<8;t++)v[t]=v[t]+p[t]|0}for(t=0;t<8;t++)for(n=3;n+1;n--){var S=v[t]>>8*n&255;i+=(S<16?0:"")+S.toString(16)}return i};
 fetch('/../assets/version.txt').then(response=>response.text()).then(versionpassover=>{version=versionpassover;});;
 document.onkeyup=function(){var e=e||window.event;if(e.altKey&&e.which==65){openNav();return false;}}
@@ -42,7 +42,7 @@ $(document).ready(function () {
 
 	client.emit('join',room);
 	room = room.substr(1);
-	if (localStorage.getItem('chatlog') && localStorage.getItem('version') === version) {
+	if (localStorage.getItem('chatlog')) {
 		chatlog = JSON.parse(localStorage.getItem('chatlog'));
 	} else {
 		localStorage.setItem('version', version);
@@ -52,7 +52,7 @@ $(document).ready(function () {
 			case 'join':
 				if ((localStorage.getItem('username'))&&(fileExists('accounts/'+document.getElementById('username').value+'.txt'))) {
 					username = localStorage.getItem('username');
-					client.emit('message', { message: `/nick ${localStorage.getItem('username')}` });
+					client.emit('message', { message: `/name ${localStorage.getItem('username')} `,platform });
 				}
 				document.title = 'BakChat '+version+' | '+room;
 				parseChatLog();
@@ -81,15 +81,15 @@ $(document).ready(function () {
 				window.location.pathname = '/' + message.split(' ')[1];
 			} else if (message.indexOf('/clearlog') === 0) {
 				chatlog[room] = [];
-				localStorage.setItem('chatlog', JSON.stringify(chatlog));
+				// localStorage.setItem('chatlog', JSON.stringify(chatlog));
 				location.reload();
 			} else if (message.indexOf('/clearname') === 0) {
 				localStorage.removeItem('username');
 			} else {
-				if ((message.indexOf('/nick') === 0)&&(fileExists('accounts/'+document.getElementById('username').value+'.txt'))){
+				if ((message.indexOf('/name') === 0)&&(fileExists('accounts/'+document.getElementById('username').value+'.txt'))){
 					localStorage.setItem('username', message.split(' ')[1]);
 				}
-				client.emit('message', { message });
+				client.emit('message',{message,platform});
 				chathistory.unshift(message);
 				index=0;
 			}
@@ -110,7 +110,7 @@ function parseChatLog() {
 		for (let i in chatlog[room]) {
 			appendLog(chatlog[room][i], true);
 		}
-		appendLog({ name: '', message: '<a href="chatlogs/'+room+'.txt">====== CACHE ======</a>', color: 'white', time: formatDate(new Date()) }, true);
+		appendLog({ name: '', message: '<a href="chatlogs/'+room+'.txt">====== CACHE ======</a>', color: 'white', time: formatDate(new Date()),platform }, true);
 	}
 }
 
@@ -118,6 +118,7 @@ function appendLog(data, avoid) {
 	let logdiv = document.getElementById('log');
 	let template = $('#itemTemplate').html();
 	let message = data.message.replace(0,'0');
+  let splatform=platform
 	let color = data.color || data.name;
   let oppColor='rgb('+(255-hexToRgb(color).r)+','+(255-hexToRgb(color).g)+','+(255-hexToRgb(color).b)+')';//swfgdrrgr
 	let time = data.time;
@@ -161,6 +162,8 @@ function appendLog(data, avoid) {
   template = template.replace('{{oppcolor}}', oppColor);
 	template = template.replace('{{time}}', time);
 	template = template.replace('{{id}}', id);
+  template = template.replace('{{platform}}', data.platform);
+  // prompt('',JSON.stringify(data));
 	$('.log').append(template);
 	setTimeout(function () { $('#' + id).removeClass('load') }, 0);
 	$('.log .item-name').each(function () {
@@ -175,12 +178,13 @@ function appendLog(data, avoid) {
 			chatlog[room] = [];
 		}
 		chatlog[room].push(data);
-		if (chatlog[room].length > 60) {
+    if(chatlog[room].length<60){
 			chatlog[room] = chatlog[room].slice(chatlog[room].length - 60);
 		}
-		localStorage.setItem('chatlog', JSON.stringify(chatlog));
+    
+		localStorage.setItem('chatlog',JSON.stringify(chatlog));
 	}
-}
+}//----------------------------------------------------------------------------------------------------
 
 function formatDate(date) {
 	let ampm = date.getHours() > 12 ? 'PM' : 'AM';	
@@ -198,10 +202,7 @@ $(window).focus(function () {
 	focus = true;
 	unread = 0;
 	document.title = 'BakChat '+version+' | '+room;
-	$('#icon').prop('href', 'images/fav.png');
-}).blur(function () {
-	focus = false;
-});
+	$('#icon').prop('href', 'images/fav.png');}).blur(function(){focus = false;});
 setTimeout(()=>{check()},500);setInterval(()=>{check()},5000);
 setInterval(()=>{if((!focus)&&(unread!==0)){if(__osc===1){$('#icon').prop('href', 'images/fav.png');__osc=0;}else{$('#icon').prop('href', 'images/fav-unread.png');__osc=1;}}},280);
 function randHex(len){for(var color="",i=0;i<len;i++)color+="0123456789ABCDEF"[Math.floor(16*Math.random())];return color}
