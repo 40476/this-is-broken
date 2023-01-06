@@ -13,6 +13,10 @@ const path=require('path');
 const JSONdb = require('simple-json-db');
 const db=new JSONdb('db.json');
 require('dotenv').config();
+// self made plugins
+const logger = require('./plugins/logger.js');
+
+//-------------------------------------------------------------------------
 
 const config={
  "time":{
@@ -36,15 +40,7 @@ const config={
 
 //--------------------------good grief, please forgive me---------------------------------
 let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.zone;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
-function DandT(){return "["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"} 
-const logger = {
-  "trace":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#00ee00;background-color:#000000;font-family:monospace;">`+DandT()+`[trace]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[32m'+e+'\x1b[0m');},//trace
-  "debug":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#0022ff;background-color:#000000;font-family:monospace;">`+DandT()+`[debug]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[36m'+e+'\x1b[0m');},//debug
-  "info":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#ffffff;background-color:#000000;font-family:monospace;">`+DandT()+`[info]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[97m'+e+'\x1b[0m');},//info
-  "warn":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#ff9900;background-color:#000000;font-family:monospace;">`+DandT()+`[WARN]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[33m'+e+'\x1b[0m');},//warn
-  "error":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#ad6e00;background-color:#000000;font-family:monospace;">`+DandT()+`[ERROR]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[93m'+e+'\x1b[0m');},//error
-  "fatal":function(e){try{fs.appendFileSync('./log/log.html',`<br><b style="color:#ff0000;background-color:#000000;font-family:monospace;">`+DandT()+`[FATAL]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[31m'+e+'\x1b[0m');},//fatal
-};
+
 
 logger.trace('server started')
 
@@ -173,6 +169,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 selectedSocket.disconnect();
                 fs.appendFileSync('public/bans/'+message.split(' ')[1]+'.txt','banned');
                 // console.log(selectedSocket+'has been banned');
+                toRoom(room).emit('message',{name:'server',message:selectedSocket+'has been banned'});
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -192,7 +189,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
             if (socket.proto.admin){
                 fs.unlink('public/bans/'+message.split(' ')[1]+'.txt',(err)=>{if(err){throw err;}});
-              socket.emit('message',{name:'server',message:`${message.split(' ')[1]} has been unbanned`});
+              toRoom(room).emit('message',{name:'server',message:`${message.split(' ')[1]} has been unbanned`});
             } else{
               socket.emit('message',{name:'server',message:`Error: Invalid credentials`});
             }
@@ -260,6 +257,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             break;
           case config.chat.commandprefix+'restart'://barp
             if(socket.proto.admin){
+              toRoom(room).emit('message',{name:'server',message:`SERVER IS RESTARTING!--------please wait until page refreshes automatically<meta http-equiv="refresh" content="5;"/>`});
               restart();
             }else{
               socket.emit('message',{name: 'server',message: `Error: Invalid credentials`}
@@ -411,7 +409,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-            case'/rr':if (socket.proto.admin){toRoom(room).emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});}break;
+          case config.chat.commandprefix+'rr':if (socket.proto.admin){toRoom(room).emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});}break;
           case config.chat.commandprefix+'key':
             if (message.split(' ')[1] === process.env.ADMIN){
               if (!socket.proto.admin){

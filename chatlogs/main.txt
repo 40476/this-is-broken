@@ -1,56 +1,30 @@
-server(S)@8:10:15 2023-01-02:715504 has joined
-server(S):@8:10:15 2023-01-02:715504 has left
-server(S)@8:10:15 2023-01-02:875D11 has joined
-server(S):@8:10:15 2023-01-02:875D11 has left
-server(S)@8:10:15 2023-01-02:811432 has joined
-server(S):@8:10:15 2023-01-02:811432 has left
-server(S)@8:10:15 2023-01-02:FC3497 has joined
-server(S):@8:10:15 2023-01-02:FC3497 has left
-server(S)@8:10:15 2023-01-02:2D92C1 has joined
-server(S)@8:10:15 2023-01-02:2D92C1 is now known as testt
-server(S)@8:10:15 2023-01-02:2D92C1 is now known as 40476
-2D92C1(40476)@8:10:15 2023-01-02:hello
-2D92C1(40476)@8:10:15 2023-01-02:this is test
-2D92C1(40476)@8:10:15 2023-01-02:*ing
-2D92C1(40476)@8:10:15 2023-01-02:dont use /help
-2D92C1(40476)@8:10:15 2023-01-02:use /?
-server(S):@8:10:15 2023-01-02:40476 has left
-server(S)@8:10:15 2023-01-02:CCE4E1 has joined
-server(S)@8:10:15 2023-01-02:CCE4E1 is now known as 40476
-CCE4E1(40476)@8:10:15 2023-01-02:Bakchat on linux openSUSE with firefox dev edition
-CCE4E1(40476)@8:10:15 2023-01-02:use /? and not /help
-server(S)@8:10:15 2023-01-02:CCE4E1 is now known as test
-server(S)@8:10:15 2023-01-02:CCE4E1 is now known as test_name
-server(S)@8:10:15 2023-01-02:CCE4E1 is now known as 40476
-CCE4E1(40476)@8:10:15 2023-01-02:users have easy to see names
-server(S):@8:10:15 2023-01-02:40476 has left
-server(S)@8:10:15 2023-01-02:0B519C has joined
-server(S)@8:10:15 2023-01-02:0B519C is now known as 40476
-server(S):@8:10:15 2023-01-02:40476 has left
-server(S)@-6:23:8 2023-01-03:C9482C has joined
-server(S):@-6:23:8 2023-01-03:C9482C has left
-server(S)@-6:5:40 2023-01-04:1E600D has joined
-server(S):@-6:5:40 2023-01-04:1E600D has left
-server(S)@-6:20:35 2023-01-04:84E10B has joined
-5A6853(5A6853)@-6:21:19 2023-01-04:f
-server(S):@5:27:58 2023-01-04:A14099 has left
-server(S):@5:27:58 2023-01-04:@A4C771 has left
-server(S)@16:26:0 2023-01-04:8A9284 has joined
-server(S)@5:31:23 2023-01-05:143EA9 has joined
-server(S)@5:31:23 2023-01-05:6E96D1 has joined
-143EA9(@143EA9)@5:31:23 01-05-2023:yoooooo it works
-143EA9(@143EA9)@5:31:23 01-05-2023:./post works
-F06CA2(F06CA2)@5:41:15 01-05-2023:/usersserver(S)@-5:10:10 2023-01-06:52AF63 has joined
-server(S):@-5:10:10 01-06-2023:52AF63 has left
-server(S)@-5:10:10 2023-01-06:D6990E has joined
-server(S):@-5:10:10 01-06-2023:D6990E has left
-server(S)@-5:10:10 2023-01-06:83804E has joined
-83804E(83804E)@-5:10:10 01-06-2023:re
-83804E(83804E)@-5:10:10 01-06-2023:e
-83804E(83804E)@-5:10:10 01-06-2023:e
-server(S):@-5:10:10 01-06-2023:83804E has left
-server(S)@-5:10:10 2023-01-06:DC5739 has joined
-server(S):@-5:10:10 01-06-2023:DC5739 has left
-server(S)@-5:10:10 2023-01-06:CC38B8 has joined
-server(S):@-5:10:10 01-06-2023:CC38B8 has left
-server(S)@-5:10:10 2023-01-06:E2713A has joined
+ server(S)@5:18:29 2023-01-06:A25744 has joined
+server(S):@5:18:29 01-06-2023:3C5372 has left
+server(S):@5:18:29 01-06-2023:D93047 has left
+server(S):@5:18:29 01-06-2023:B48F1C has left
+server(S):@5:18:29 01-06-2023:933D28 has left
+server(S):@5:18:29 01-06-2023:592896 has left
+server(S):@5:18:29 01-06-2023:B20C25 has left
+server(S)@5:22:51 2023-01-06:B4CDE6 has joined
+server(S):@5:22:51 01-06-2023:B4CDE6 has left
+server(S)@5:22:51 2023-01-06:A41C25 has joined
+server(S):@5:22:51 01-06-2023:DC8C2B has left
+A41C25(A41C25)@5:22:51 01-06-2023:e
+server(S)@5:25:58 2023-01-06:228E9C has joined
+server(S)@5:26:45 2023-01-06:45ACE9 has joined
+server(S):@5:26:45 01-06-2023:45ACE9 has left
+server(S)@5:38:51 2023-01-06:CB9495 has joined
+CB9495(CB9495)@5:38:51 01-06-2023:s
+CB9495(CB9495)@5:38:51 01-06-2023:fhf
+CB9495(CB9495)@5:38:51 01-06-2023:h
+CB9495(CB9495)@5:38:51 01-06-2023:fh
+CB9495(CB9495)@5:38:51 01-06-2023:gf
+CB9495(CB9495)@5:38:51 01-06-2023:gh
+CB9495(CB9495)@5:38:51 01-06-2023:gf
+CB9495(CB9495)@5:38:51 01-06-2023:f
+CB9495(CB9495)@5:38:51 01-06-2023:f
+CB9495(CB9495)@5:38:51 01-06-2023:f
+server(S)@5:39:35 2023-01-06:A6FEC2 has joined
+server(S)@5:40:41 2023-01-06:59A8E9 has joined
+server(S)@5:41:11 2023-01-06:2B5BD3 has joined
+server(S):@5:41:11 01-06-2023:2B5BD3 has left
