@@ -4,7 +4,7 @@ const app=express();
 const http=require('http').Server(app);
 const readline = require('readline').createInterface({input: process.stdin,output: process.stdout});
 //TODO: configure to run with multiple ports --> https://stackoverflow.com/questions/19296797/running-node-js-http-server-on-multiple-ports
-const request = require('request');
+// const request = require('request');
 const io=require('socket.io').listen(http);
 const bodyParser=require('body-parser');
 const fs=require('fs');console.log(fs.readFileSync('./logo.txt','utf8'));
@@ -12,31 +12,14 @@ const cookieParser=require('cookie-parser');
 const path=require('path');
 const JSONdb = require('simple-json-db');
 const db=new JSONdb('db.json');
+const proc = require("process")
 require('dotenv').config();
 // self made plugins
 const logger = require('./plugins/logger.js');
-
+const config = require('./config.json');
 //-------------------------------------------------------------------------
 
-const config={
- "time":{
-  "zone":6,    
- },
- "server":{
-  "name":`bakchat.40476.repl.co`,
- "manAuthStartup":false,
- },
- "rm_publicLogs_startup":true,
- "DEVMODE":false,
- "consoleRefreshRate":500,
- "chat":{
-  "notAllowedWords":['fuck','shit','motherfucker','mothertrucker','Bastard','Bellend','Bloodclaat','Clunge','Minge','Punani','Pussy','Twat','Cunt','penis','vulva','vagina','sex','rape','cum','orgasm'],
-   "disableTXTfilter":true, 
-   "commandprefix":'/',
- }
-};
-//TODO: get config from json file without parse errors
-//const config=fs.readFileSync('./config.json');
+
 
 //--------------------------good grief, please forgive me---------------------------------
 let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.zone;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
