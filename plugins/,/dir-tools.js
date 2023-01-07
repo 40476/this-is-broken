@@ -1,0 +1,2 @@
+exports.delFolder={function(dir){fs.readdir(dir, (err, files) => {if (err) throw err;for (let file of files) fs.unlink(dir+'/'+file,(err)=>{if (err) throw err;});return fs.rmdir(dir,(err) => {if (err) throw err;logger.trace('folder "'+dir+'" deleted')});});}}
+exports.makedir={function(dir){!fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true });logger.trace('folder "'+dir+'" created')}}
