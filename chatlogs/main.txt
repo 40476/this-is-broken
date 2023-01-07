@@ -28,3 +28,8 @@ server(S)@5:39:35 2023-01-06:A6FEC2 has joined
 server(S)@5:40:41 2023-01-06:59A8E9 has joined
 server(S)@5:41:11 2023-01-06:2B5BD3 has joined
 server(S):@5:41:11 01-06-2023:2B5BD3 has left
+server(S)@5:41:11 2023-01-06:651C1E has joined
+server(S):@5:41:11 01-06-2023:651C1E has left
+server(S)@5:41:11 2023-01-06:6F69C8 has joined
+server(S):@5:41:11 01-06-2023:6F69C8 has left
+server(S)@0:44:6 2023-01-07:BC5B79 has joined

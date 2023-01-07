@@ -167,7 +167,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             if (socket.proto.admin){
               if (selectedSocket){
                 selectedSocket.disconnect();
-                fs.appendFileSync('public/bans/'+message.split(' ')[1]+'.txt','banned');
+                fs.writeFileSync('public/bans/'+message.split(' ')[1]+'.txt','banned');
                 // console.log(selectedSocket+'has been banned');
                 toRoom(room).emit('message',{name:'server',message:selectedSocket+'has been banned'});
               } else{
@@ -188,8 +188,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             },true);
             selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
             if (socket.proto.admin){
-                fs.unlink('public/bans/'+message.split(' ')[1]+'.txt',(err)=>{if(err){throw err;}});
-              toRoom(room).emit('message',{name:'server',message:`${message.split(' ')[1]} has been unbanned`});
+                try{fs.unlink('public/bans/'+message.split(' ')[1]+'.txt');toRoom(room).emit('message',{name:'server',message:`${message.split(' ')[1]} has been unbanned`});}catch(e){logger.warn(e+'<br>'+this);socket.emit('message',{name:'server',message:`Error: user "${message.split(' ')[1]}" is not banned`});}
             } else{
               socket.emit('message',{name:'server',message:`Error: Invalid credentials`});
             }
@@ -257,7 +256,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             break;
           case config.chat.commandprefix+'restart'://barp
             if(socket.proto.admin){
-              toRoom(room).emit('message',{name:'server',message:`SERVER IS RESTARTING!--------please wait until page refreshes automatically<meta http-equiv="refresh" content="5;"/>`});
+              toRoom(room).emit('message',{name:'server',message:`SERVER IS RESTARTING!--------please wait until page refreshes automatically<br>if the server is down please try again in 5 minutes<meta http-equiv="refresh" content="10;"/>`});
               restart();
             }else{
               socket.emit('message',{name: 'server',message: `Error: Invalid credentials`}
@@ -269,9 +268,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             room:room,
             message:message.split(' ')[2]
           });
-          }else{
-            socket.emit('message',{name:'server',message:`Error: Invalid credentials`});
-          }break;
+          }else{socket.emit('message',{name:'server',message:`Error: Invalid credentials`});}break;
           case config.chat.commandprefix+'deop':
             selectedSocket=query({
               name: message.split(' ')[1],

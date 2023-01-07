@@ -178,8 +178,8 @@ function appendLog(data, avoid) {
 			chatlog[room] = [];
 		}
 		chatlog[room].push(data);
-    if(chatlog[room].length<60){
-			chatlog[room] = chatlog[room].slice(chatlog[room].length - 60);
+    if(chatlog[room].length<(1/0)){
+			chatlog[room] = chatlog[room].slice(chatlog[room].length - 1000);
 		}
     
 		localStorage.setItem('chatlog',JSON.stringify(chatlog));
@@ -255,3 +255,4 @@ window.addEventListener('load', function() {
 
 document.getElementById("advert").innerHTML=randAd();
 var modal = document.getElementById("myModal");var btn = document.getElementById("myBtn");var span = document.getElementsByClassName("close")[0];modal.style.display = "block";span.onclick = function() {modal.style.display = "none";};window.onclick = function(event) {if (event.target == modal) {modal.style.display = "none";}} 
+const thisurl = new URL(document.location);if(thisurl.hash==='#e'){chatlog=[];localStorage.setItem('chatlog',JSON.stringify(chatlog));document.location=thisurl.pathname;}//reset if anyone breaks ur client
