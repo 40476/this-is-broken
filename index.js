@@ -1,11 +1,9 @@
 const initTime=Date.now();
 const express=require('express');
-var swearjar = require('swearjar');
 const app=express();
 const http=require('http').Server(app);
 const readline = require('readline').createInterface({input: process.stdin,output: process.stdout});
 //TODO: configure to run with multiple ports --> https://stackoverflow.com/questions/19296797/running-node-js-http-server-on-multiple-ports
-// const request = require('request');
 const io=require('socket.io').listen(http);
 const bodyParser=require('body-parser');
 const fs=require('fs');console.log(fs.readFileSync('./logo.txt','utf8'));
@@ -16,6 +14,11 @@ const db=new JSONdb('db.json');
 // self made plugins
 const logger = require('./plugins/,/logger.js');
 const config = require('./config.json');
+//internally installed plugins
+const swearjar = require('./plugins/swearjar');
+
+
+
 //-------------------------------------------------------------------------
 
 
