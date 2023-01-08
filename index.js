@@ -19,10 +19,6 @@ const swearjar = require('./plugins/swearjar');
 
 
 
-//-------------------------------------------------------------------------
-
-
-
 //--------------------------good grief, please forgive me---------------------------------
 let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.zone;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
 
@@ -34,19 +30,18 @@ var version=fs.readFileSync('./public/assets/version.txt');
 var versionInfo=`BakChat version `+version+` -- as PID:`+process.pid+` on `+process.platform+`\n\n`+fs.readFileSync('assets/credits.txt')+`\n-------------------`;
 console.log(versionInfo);
 
-  /*I768*/var enablesend,recentHistory="",bar="",consoleLastRefresh;
+  /*I768*/var recentHistory="",bar="",consoleLastRefresh;
 app.use(bodyParser.json());app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());app.use(express.static('public'));
 app.get('/',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
 app.get('/:room',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
 app.get('*',(req,res) =>{res.sendFile(__dirname+'/public/404.html');});
 http.listen(3000,()=> undefined);
-var cussWords=config.chat.notAllowedWords;
 io.engine.generateId=(req)=>{return randHex(6);};
+function makeFolder(dir){!fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true });logger.trace('folder "'+dir+'" created')}
+function delFolder(dir){fs.readdir(dir, (err, files) => {if (err) throw err;for (let file of files) fs.unlink(dir+'/'+file,(err)=>{if (err) throw err;});return fs.rmdir(dir,(err) => {if (err) throw err;logger.trace('folder "'+dir+'" deleted')});});}
 function urmom(file) {db.set(file,{name:file});fs.appendFileSync('./public/logs.html','<a href="/../chatlogs/'+file+'">'+file+'</a><br>');}
 function Tolog(room,data){fs.appendFileSync('./public/chatlogs/'+room+'.txt',data);fs.appendFileSync('./chatlogs/'+room+'.txt',data)}
-function delFolder(dir){fs.readdir(dir, (err, files) => {if (err) throw err;for (let file of files) fs.unlink(dir+'/'+file,(err)=>{if (err) throw err;});return fs.rmdir(dir,(err) => {if (err) throw err;logger.trace('folder "'+dir+'" deleted')});});}
-function makeFolder(dir){!fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true });logger.trace('folder "'+dir+'" created')}
 function restart() {logger.fatal('admin command trigger-> restart');process.on("exit",function(){require("child_process").spawn(process.argv.shift(),process.argv,{cwd:process.cwd(),detached : true,stdio: "inherit"});});process.exit();}
 function query(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets,defaults(db,!0);for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?ret:main}
 function linez(str){var str_arr = str.split('\n');var newline_length = str_arr.length;return newline_length;}
@@ -437,7 +432,8 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             }
             break;
           case config.chat.commandprefix+'?':
-            if(message.split(' ')[1]==='op'){fs.readFile('assets/opcmd.txt','utf8',(err,file) =>{socket.emit('message',{name: 'server',message: file});});}
+            if((message.split(' ')[1]==='op')&&(socket.proto.admin)){fs.readFile('assets/opcmd.txt','utf8',(err,file) =>{socket.emit('message',{name: 'server',message: file});});}
+            if(!socket.proto.admin){socket.emit('message',{name:server,message:'error: not an admin or moderator'})}
             fs.readFile('assets/cmd.txt','utf8',(err,file) =>{
               socket.emit('message',{
                 name: 'server',

@@ -1,6 +1,5 @@
-server(S)@13:27:2 2023-01-08:0B5E0A has joined
-server(S)@13:27:2 01-08-2023:0B5E0A is now known as 40476
-0B5E0A(40476)@13:27:2 01-08-2023:eee\
-0B5E0A(40476)@13:27:2 01-08-2023:e
-0B5E0A(40476)@13:27:2 01-08-2023:e
-0B5E0A(40476)@13:27:2 01-08-2023:fuck
+server(S)@15:49:30 2023-01-08:BD973D has joined
+server(S)@15:49:30 01-08-2023:BD973D is now known as 40476_iframeViaReplit
+BD973D(40476_iframeViaReplit)@15:49:30 01-08-2023:hgf
+BD973D(40476_iframeViaReplit)@15:49:30 01-08-2023:fuck
+server(S):@15:49:30 01-08-2023:ED38B1 has left
