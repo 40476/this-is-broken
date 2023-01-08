@@ -475,16 +475,16 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         //         //https://www.npmjs.com/package/swearjar
           
         // }
-        if((message.includes('/key')!==true)&&(enablesend)){
+        if(message.includes('/key')!==true){
 
           /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+message+'\n');}else if(message.includes('/key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+message+'\n');}
-      if((enablesend===true)||(config.chat.disableTXTfilter)){
+      
         toRoom(socket.proto.room).emit('message',{
           name: socket.proto.name,
           message: swearjar.censor(message),
           color: socket.proto.id,
           platform:platform
-        });}
+        });
         }
         enablesend=true;
     }
