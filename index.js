@@ -1,5 +1,6 @@
 const initTime=Date.now();
 const express=require('express');
+var swearjar = require('swearjar');
 const app=express();
 const http=require('http').Server(app);
 const readline = require('readline').createInterface({input: process.stdin,output: process.stdout});
@@ -467,16 +468,17 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         }
       } else{
          enablesend=true;
-              for (let i=0;i<cussWords.length;i++){
-          if(message.replace(/\s+/g,'').toLowerCase().includes(cussWords[i].toLowerCase())){enablesend=false;}
-        }
+        //       for (let i=0;i<cussWords.length;i++){
+        //         //https://www.npmjs.com/package/swearjar
+          
+        // }
         if((message.includes('/key')!==true)&&(enablesend)){
 
           /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+message+'\n');}else if(message.includes('/key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+message+'\n');}
       if((enablesend===true)||(config.chat.disableTXTfilter)){
         toRoom(socket.proto.room).emit('message',{
           name: socket.proto.name,
-          message: message,
+          message: swearjar.censor(message),
           color: socket.proto.id,
           platform:platform
         });}

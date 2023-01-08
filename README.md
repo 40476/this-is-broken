@@ -21,4 +21,4 @@ i know the video is broken but it almost murdered my RAM since it was full HD ðŸ
 [404 page by sarazond](https://codepen.io/sarazond/pen/jOKyjZ)
 ## Admin instructions
 * Censored chat messages will not be sent
-* NOTE: cuss words filter currently does not work
+* bad word filter currently cannot be be turned off due to me needing to go to sleep

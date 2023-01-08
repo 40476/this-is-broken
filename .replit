@@ -49,8 +49,8 @@ support = true
     type = "request"
 
       [debugger.interactive.initializeMessage.arguments]
-      clientID = "replit"
-      clientName = "replit.com"
+      clientID = "40476"
+      clientName = "40476"
       columnsStartAt1 = true
       linesStartAt1 = true
       locale = "en-us"
@@ -81,6 +81,8 @@ support = true
 
 [languages.javascript]
 pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
+[languages.php]
+pattern = "**/{*.php}"
 
 [languages.javascript.languageServer]
 start = "typescript-language-server --stdio"
