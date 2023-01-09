@@ -432,3 +432,72 @@ server(S)@-5:12:27 2023-01-09:C5C43A has joined
 server(S)@-5:12:27 01-09-2023:C5C43A is now known as 40476_iframeViaReplit
 server(S)@-5:13:3 2023-01-09:88ACB2 has joined
 server(S)@-5:13:3 01-09-2023:88ACB2 is now known as 40476_iframeViaReplit
+server(S):@-5:13:3 01-09-2023:323B0C has left
+server(S):@-5:13:3 01-09-2023:40476_iframeViaReplit has left
+server(S)@-3:27:27 2023-01-09:0D8CC2 has joined
+server(S)@-3:27:27 01-09-2023:0D8CC2 is now known as poop
+server(S):@-3:27:27 01-09-2023:poop has left
+server(S)@-3:27:27 2023-01-09:264C0E has joined
+server(S)@-3:27:27 01-09-2023:264C0E is now known as poop
+server(S):@-3:27:27 01-09-2023:poop has left
+server(S)@4:22:46 2023-01-09:D55A0C has joined
+server(S)@4:22:46 01-09-2023:D55A0C is now known as 40476_iframeViaReplit
+server(S)@5:5:42 2023-01-09:0F5CD6 has joined
+server(S)@5:5:42 01-09-2023:0F5CD6 is now known as 40476_iframeViaReplit
+server(S)@5:6:7 2023-01-09:8A9B7A has joined
+server(S)@5:6:7 01-09-2023:8A9B7A is now known as 40476_iframeViaReplit
+server(S)@5:6:30 2023-01-09:B4A8AC has joined
+server(S)@5:6:30 01-09-2023:B4A8AC is now known as 40476_iframeViaReplit
+server(S)@5:6:52 2023-01-09:317585 has joined
+server(S)@5:6:52 01-09-2023:317585 is now known as 40476_iframeViaReplit
+server(S)@5:6:52 2023-01-09:7DFD9B has joined
+server(S)@5:6:52 01-09-2023:7DFD9B is now known as 40476[linux]
+server(S):@5:6:52 01-09-2023:40476[linux] has left
+server(S)@5:6:52 2023-01-09:89578C has joined
+server(S)@5:6:52 01-09-2023:89578C is now known as 40476[linux]
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:l
+server(S):@5:6:52 01-09-2023:40476[linux] has left
+server(S)@5:6:52 2023-01-09:D6EEA4 has joined
+server(S)@5:6:52 01-09-2023:D6EEA4 is now known as 40476[linux]
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:z
+server(S):@5:6:52 01-09-2023:40476[linux] has left
+server(S)@5:6:52 2023-01-09:F15BD0 has joined
+server(S)@5:6:52 01-09-2023:F15BD0 is now known as 40476[linux]
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:b
+server(S):@5:6:52 01-09-2023:40476[linux] has left
+server(S)@5:6:52 2023-01-09:341148 has joined
+server(S)@5:6:52 01-09-2023:341148 is now known as 40476[linux]
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:c
+server(S):@5:6:52 01-09-2023:40476[linux] has left
+server(S)@5:6:52 2023-01-09:A83597 has joined
+server(S)@5:6:52 01-09-2023:A83597 is now known as 40476[linux]
+server(S):@5:6:52 01-09-2023:40476[linux] has left
+server(S)@5:6:52 2023-01-09:984A4C has joined
+server(S)@5:6:52 01-09-2023:984A4C is now known as 40476[linux]
+984A4C(40476[linux])@5:6:52 01-09-2023:l
+984A4C(40476[linux])@5:6:52 01-09-2023:l
+984A4C(40476[linux])@5:6:52 01-09-2023:l
+984A4C(40476[linux])@5:6:52 01-09-2023:l
+984A4C(40476[linux])@5:6:52 01-09-2023:ll
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:l
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:l
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:l
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:l
+server(S):@5:6:52 01-09-2023:40476[linux] has left
+server(S)@5:6:52 2023-01-09:E8FA80 has joined
+server(S)@5:6:52 01-09-2023:E8FA80 is now known as 40476[linux]
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:cb
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:v
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:v
+317585(40476_iframeViaReplit)@5:6:52 01-09-2023:v
+server(S)@5:23:33 2023-01-09:FB8E67 has joined
+server(S)@5:23:33 01-09-2023:FB8E67 is now known as 40476_iframeViaReplit
+server(S):@5:23:33 01-09-2023:9AF108 has left
+server(S)@5:23:33 2023-01-09:7FBC5F has joined
+server(S)@5:23:33 01-09-2023:7FBC5F is now known as 40476[linux]
+FB8E67(40476_iframeViaReplit)@5:23:33 01-09-2023:sd
+FB8E67(40476_iframeViaReplit)@5:23:33 01-09-2023:b
+server(S)@5:26:48 2023-01-09:75A7A6 has joined
+server(S)@5:26:48 01-09-2023:75A7A6 is now known as 40476_iframeViaReplit
+server(S)@5:27:20 2023-01-09:140E50 has joined
+server(S)@5:27:20 01-09-2023:140E50 is now known as 40476_iframeViaReplit

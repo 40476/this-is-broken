@@ -1,8 +1,10 @@
 function settings(){
   document.documentElement.style.setProperty("--borderRad",document.getElementById('borderRadius_control').value+'px');
-  fetch('accounts/'+document.getElementById('username').value+'.txt').then(response=>response.text()).then(psk=>{if(sha256(document.getElementById('password').value)===psk){localStorage.setItem('username',document.getElementById('username').value);client.emit('message',{message:`/name ${localStorage.getItem('username')}`});}else{alert('invalid login\n'+psk+'\n'+sha256(document.getElementById('password').value))}});
-  // fetch('accounts/'+document.getElementById('username').value+'.txt').then(response=>response.text()).then(psk=>{if(sha256(document.getElementById('password').value)===psk){loginstatus=true;}else{loginstatus=false;}return loginstatus});
+  if(document.getElementById('username').value!==''){fetch('accounts/'+document.getElementById('username').value+'.txt').then(response=>response.text()).then(psk=>{if(sha256(document.getElementById('password').value)===psk){localStorage.setItem('username',document.getElementById('username').value);client.emit('message',{message:`/name ${localStorage.getItem('username')}`});}else{alert('invalid login\n'+psk+'\n'+sha256(document.getElementById('password').value))}});}
+  
+  pingSound=new Audio('/../assets/audio/'+document.getElementById('audio').value);
 }
+
 function fileExists(url) {
     if(url){
         var req = new XMLHttpRequest();
@@ -20,7 +22,7 @@ var sha256=function r(o){function f(r,o){return r>>>o|r<<32-o}for(var t,n,a=Math
 fetch('/../assets/version.txt').then(response=>response.text()).then(versionpassover=>{version=versionpassover;});;
 document.onkeyup=function(){var e=e||window.event;if(e.altKey&&e.which==65){openNav();return false;}}
 var room = window.location.pathname === '/' ? '/main' : window.location.pathname;
-var key = false;const params = new URLSearchParams(window.location.search);var __bruh=randHex(6);var pingSound=new Audio('/../assets/MP3/ting.mp3');
+var key = false;const params = new URLSearchParams(window.location.search);var __bruh=randHex(6);var pingSound=new Audio('/../assets/audio/ting.mp3');
 var client=io(),__exec=false,chathistory=[],index=0,chatlog={},lasttime=new Date(),username,unread=0,focus=true;
 function updateConfig(){}
 let lastuser='';
@@ -67,8 +69,7 @@ $(document).ready(function () {
 			document.title = 'BakChat '+version+' | '+room+' ('+unread+')';
 			
       /*$('#icon').prop('href', 'images/fav-unread.png');*/
-      
-      if(document.getElementById("audio").checked===true){pingSound.play();}
+      pingSound.play();
     }
 	});
 
