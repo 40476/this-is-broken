@@ -13,6 +13,7 @@ const JSONdb = require('simple-json-db');
 const db=new JSONdb('db.json');
 // self made plugins
 const logger = require('./plugins/,/logger.js');
+const dtool=require('./plugins/,/dir-tools.js')
 const config = require('./config.json');
 //internally installed plugins
 const swearjar = require('./plugins/swearjar');
@@ -38,6 +39,11 @@ app.get('/:room',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
 app.get('*',(req,res) =>{res.sendFile(__dirname+'/public/404.html');});
 http.listen(3000,()=> undefined);
 io.engine.generateId=(req)=>{return randHex(6);};
+function randHex(len){for(var color="",i=0;i<len;i++)color+="0123456789ABCDEF"[Math.floor(16*Math.random())];return color}
+function copy(arr){return JSON.parse(JSON.stringify(arr))}
+function occurences(arr){var prev,a=[],b=[];(arr=copy(arr)).sort();for(var i=0;i<arr.length;i++)arr[i]!==prev?(a.push(arr[i]),b.push(1)):b[b.length-1]++,prev=arr[i];return{a:a,b:b}}
+function toRoom(room){return{emit:(type,data)=>{let sockets=queryKeys({room:room});for(let i in sockets)io.to(sockets[i]).emit(type,data)}}}
+function formatHMS(time){let hours=Math.floor(time/1e3/60/60),minutes=Math.floor(time/1e3/60)%60,seconds=Math.floor(time/1e3)%60;return`${hours}h:${minutes<10?"0"+minutes:minutes}m:${seconds<10?"0"+seconds:seconds}s`}
 function makeFolder(dir){!fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true });logger.trace('folder "'+dir+'" created')}
 function delFolder(dir){fs.readdir(dir, (err, files) => {if (err) throw err;for (let file of files) fs.unlink(dir+'/'+file,(err)=>{if (err) throw err;});return fs.rmdir(dir,(err) => {if (err) throw err;logger.trace('folder "'+dir+'" deleted')});});}
 function urmom(file) {db.set(file,{name:file});fs.appendFileSync('./public/logs.html','<a href="/../chatlogs/'+file+'">'+file+'</a><br>');}
@@ -115,18 +121,36 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
     
 
     if (message && !socket.proto.muted){
-      if (message[0] ===config.chat.commandprefix){
-        let newname;
-        let selectedSocket;
-        let rooms;
+      if (message[0]===config.chat.commandprefix){
+        let newname,selectedSocket,rooms;
         switch (message.split(' ')[0]){
 
 
 
-          case config.chat.commandprefix+'account':
+
+
+
+
+
+
+
+
             
-            fs.writeFileSync('./public/accounts/'+message.split(' ')[1]+'.txt',sha256(message.split(' ')[2]));
-          break;
+
+          case'/cred':if(socket.proto.admin||socket.proto.moderator){try{
+            var curentJSON=JSON.parse(fs.readFileSync(`./public/accounts${message.split(' ')[1]}.json`))
+            socket.emit('message',{name:'server',message:curentJSON})
+          }catch(e){logger.FATAL(e);}}else{
+            socket.emit('message',{name:'server',message:`Error: Invalid credentials`});
+          }break;
+
+
+
+
+
+
+            
+          case config.chat.commandprefix+'account':fs.writeFileSync('./public/accounts/'+message.split(' ')[1]+'.txt',sha256(message.split(' ')[2]));break;
           /*credits*/case '/credits':socket.emit('message',{name: 'server',message: `BakChat version `+version+'<br><pre>'+fs.readFileSync('assets/credits.txt')+'</pre>'});break;
             //ban-----------------------------------------------------------------------------------------------
           case config.chat.commandprefix+'ban':
@@ -520,11 +544,6 @@ function defaults(socket,many){
     socket.proto.admin=socket.proto.admin || false;
   }
 }
-function randHex(len){for(var color="",i=0;i<len;i++)color+="0123456789ABCDEF"[Math.floor(16*Math.random())];return color}
-function copy(arr){return JSON.parse(JSON.stringify(arr))}
-function occurences(arr){var prev,a=[],b=[];(arr=copy(arr)).sort();for(var i=0;i<arr.length;i++)arr[i]!==prev?(a.push(arr[i]),b.push(1)):b[b.length-1]++,prev=arr[i];return{a:a,b:b}}
-function toRoom(room){return{emit:(type,data)=>{let sockets=queryKeys({room:room});for(let i in sockets)io.to(sockets[i]).emit(type,data)}}}
-function formatHMS(time){let hours=Math.floor(time/1e3/60/60),minutes=Math.floor(time/1e3/60)%60,seconds=Math.floor(time/1e3)%60;return`${hours}h:${minutes<10?"0"+minutes:minutes}m:${seconds<10?"0"+seconds:seconds}s`}
 },2000);
 }}
 

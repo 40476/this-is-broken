@@ -13,12 +13,8 @@ socket.emit('message',{
 
 
 
-case'/post':if(socket.proto.admin){
-  socket.emit('message',{
-  name:message.split(' ')[1],
-  room:room,
-  message:message.split(' ')[2]
-});
+case'/cred':if(socket.proto.admin||socket.proto.moderator){
+  
 }else{
   socket.emit('message',{name:'server',message:`Error: Invalid credentials`});
 }break;

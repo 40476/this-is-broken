@@ -1,5 +1,2 @@
-server(S)@15:49:30 2023-01-08:BD973D has joined
-server(S)@15:49:30 01-08-2023:BD973D is now known as 40476_iframeViaReplit
-BD973D(40476_iframeViaReplit)@15:49:30 01-08-2023:hgf
-BD973D(40476_iframeViaReplit)@15:49:30 01-08-2023:fuck
-server(S):@15:49:30 01-08-2023:ED38B1 has left
+server(S)@-5:13:3 2023-01-09:88ACB2 has joined
+server(S)@-5:13:3 01-09-2023:88ACB2 is now known as 40476_iframeViaReplit
