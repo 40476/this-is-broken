@@ -28,7 +28,7 @@ const swearjar = require('./plugins/swearjar');
 
 
 
-//--------------------------good grief, please forgive me---------------------------------
+
 let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.zone;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
 
 
@@ -64,7 +64,6 @@ function queryKeys(obj,and,db){let keys=Object.keys(obj),values=Object.values(ob
   
 if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./public/chatlogs');setTimeout(function(){makeFolder('./public/chatlogs')},50);}
   setInterval(function(){console.clear();bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+"-{"+((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)+" & "+Math.trunc((Date.now()-initTime)/1000)+"}["+config.server.name+"]\n"+bar+recentHistory);consoleLastRefresh=Date.now();},config.consoleRefreshRate);
-// setInterval(function(){},1000);
 
   io.on('connection',(socket) =>{
   socket.on('join',(data) =>{
