@@ -63,7 +63,7 @@ function RemoveFirstLine(text){var lines = text.split('\n');lines.splice(0,1);re
 function queryKeys(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets;for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?Object.keys(ret):Object.keys(main)}
   
 if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./public/chatlogs');setTimeout(function(){makeFolder('./public/chatlogs')},50);}
-  setInterval(function(){bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){console.clear();if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+"-{"+((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)+" & "+Math.trunc((Date.now()-initTime)/1000)+"}["+config.server.name+"]\n"+bar+recentHistory);consoleLastRefresh=Date.now();},config.consoleRefreshRate);
+  setInterval(function(){console.clear();bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+"-{"+((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)+" & "+Math.trunc((Date.now()-initTime)/1000)+"}["+config.server.name+"]\n"+bar+recentHistory);consoleLastRefresh=Date.now();},config.consoleRefreshRate);
 // setInterval(function(){},1000);
 
   io.on('connection',(socket) =>{
