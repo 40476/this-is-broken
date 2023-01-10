@@ -80,6 +80,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
       socket.proto.id=socket.id;
       socket.proto.created=new Date();
       socket.proto.admin=false;
+      socket.proto.moderator=false;
       socket.join(room);
       socket.emit('bounce',{
         type: 'join',
@@ -118,7 +119,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
 
   socket.on('message',(data) =>{
     defaults(socket);
-    let message=data.message.substr(0,500);
+    let message=data.message;
     let name=socket.proto.id;
     let platform= socket.proto.platform;/*logger.fatal(platform)*/
     let sockets=query({room:socket.proto.room});
@@ -167,7 +168,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               room: room
             },true);
             selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
-            if (socket.proto.admin){
+            if (socket.proto.admin||socket.proto.moderator){
               if (selectedSocket){
                 selectedSocket.disconnect();
                 fs.writeFileSync('public/bans/'+message.split(' ')[1]+'.txt','banned');
@@ -190,7 +191,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               room: room
             },true);
             selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
-            if (socket.proto.admin){
+            if (socket.proto.admin||socket.proto.moderator){
                 try{fs.unlink('public/bans/'+message.split(' ')[1]+'.txt');toRoom(room).emit('message',{name:'server',message:`${message.split(' ')[1]} has been unbanned`});}catch(e){logger.warn(e+'<br>'+this);socket.emit('message',{name:'server',message:`Error: user "${message.split(' ')[1]}" is not banned`});}
             } else{
               socket.emit('message',{name:'server',message:`Error: Invalid credentials`});
@@ -241,7 +242,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               room: room
             },true);
             selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
-            if (socket.proto.admin){
+            if (socket.proto.admin||socket.proto.moderator){
               if (selectedSocket){
                 selectedSocket.disconnect();
               } else{
@@ -266,10 +267,10 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             );}
           break;
           case'/post':if(socket.proto.admin){
-            socket.emit('message',{
+            toRoom(room).emit('message',{
             name:message.split(' ')[1],
             room:room,
-            message:message.split(' ')[2]
+            message:message.split(' ').slice(2).join(' ')
           });
           }else{socket.emit('message',{name:'server',message:`Error: Invalid credentials`});}break;
           case config.chat.commandprefix+'deop':
@@ -282,9 +283,37 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               if (selectedSocket && selectedSocket.proto.id !== socket.proto.id){
                 selectedSocket.proto.admin=false;
                 selectedSocket.proto.name=selectedSocket.proto.name.replace('@','');
+                try{selectedSocket.proto.name=selectedSocket.proto.name.replace('$','');}catch(e){logger.ERROR(e)}
                 toRoom(socket.proto.room).emit('message',{
                   name: 'server',
                   message: `${selectedSocket.proto.name} is no longer an admin`
+                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${selectedSocket.proto.name} is no longer an admin`+'\n');
+              } else{
+                socket.emit('message',{
+                  name: 'server',
+                  message: `Error: User ${message.split(' ')[1]} does not exist`
+                });
+              }
+            } else{
+              socket.emit('message',{
+                name: 'server',
+                message: `Error: Invalid credentials`
+              });
+            }
+            break;
+            case config.chat.commandprefix+'deMod'://-------------------------------------------remove moderator perm
+            selectedSocket=query({
+              name: message.split(' ')[1],
+              room: room
+            },true);
+            selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
+            if (socket.proto.moderator){
+              if (selectedSocket && selectedSocket.proto.id !== socket.proto.id){
+                selectedSocket.proto.moderator=false;
+                selectedSocket.proto.name=selectedSocket.proto.name.replace('$','');
+                toRoom(socket.proto.room).emit('message',{
+                  name: 'server',
+                  message: `${selectedSocket.proto.name} is no longer an moderator`
                 });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${selectedSocket.proto.name} is no longer an admin`+'\n');
               } else{
                 socket.emit('message',{
@@ -309,6 +338,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               if (selectedSocket){
                 selectedSocket.proto.admin=true;
                 selectedSocket.proto.name='@'+selectedSocket.proto.name;
+                try{selectedSocket.proto.name=selectedSocket.proto.name.replace('$','');}catch(e){logger.ERROR(e)}
                 toRoom(socket.proto.room).emit('message',{
                   name: 'server',
                   message: `${selectedSocket.proto.name} is now an admin`
@@ -332,7 +362,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               room: room
             },true);
             selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
-            if (socket.proto.admin){
+            if (socket.proto.admin||socket.proto.moderator){
               if (selectedSocket){
                 selectedSocket.proto.muted=false;
                 toRoom(socket.proto.room).emit('message',{
@@ -358,7 +388,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               room: room
             },true);
             selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
-            if (socket.proto.admin){
+            if (socket.proto.admin||socket.proto.moderator){
               if (selectedSocket && selectedSocket.proto.id !== socket.proto.id){
                 selectedSocket.proto.muted=true;
                 toRoom(socket.proto.room).emit('message',{
@@ -378,7 +408,8 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-          case config.chat.commandprefix+'update':if(socket.proto.admin){
+          case config.chat.commandprefix+'update':
+            if(socket.proto.admin){
               /* if user is admin*/
             //TODO: fetch updates from https://raw.githubusercontent.com/40476/BakChat/main/index.js
             }else{}break;
@@ -411,10 +442,14 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             break;
           case config.chat.commandprefix+'rr':if (socket.proto.admin){toRoom(room).emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});}break;
           case config.chat.commandprefix+'key':
+            try{socket.proto.name=socket.proto.name.replace('$','');}catch(e){logger.ERROR(e)}
+            try{socket.proto.name=socket.proto.name.replace('@','');}catch(e){logger.ERROR(e)}
             if (message.split(' ')[1] === process.env.ADMIN){
               if (!socket.proto.admin){
                 socket.proto.admin=true;
+                socket.proto.moderator=false;
                 socket.proto.name='@'+socket.proto.name;
+                try{socket.proto.name=socket.proto.name.replace('$','');}catch(e){logger.ERROR(e)}
                 toRoom(socket.proto.room).emit('message',{
                   name: 'server',
                   message: `${socket.proto.name} is now an admin`
@@ -424,16 +459,29 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                   name: 'server',
                   message: `Error: Already an admin`
                 });
+                try{socket.proto.name=socket.proto.name.replace('@','');}catch(e){logger.ERROR(e)}
+                socket.proto.name='@'+socket.proto.name;
               }
             } else{
-              socket.emit('message',{
+              if(message.split(' ')[1] === process.env.MODr){
+                socket.proto.admin=true;
+                socket.proto.moderator=true;
+                socket.proto.name='$'+socket.proto.name;
+                toRoom(socket.proto.room).emit('message',{
+                  name: 'server',
+                  message: `${socket.proto.name} is now a moderator`
+                });setTimeout(function(){},100)
+              }
+              if(true){
+                socket.emit('message',{
                 name: 'server',
                 message: 'Error: Invalid credentials'
-              });
+              });}
             } 
             break;
           case config.chat.commandprefix+'name':
             if (message.split(' ')[1] && message.split(' ')[1].replace(0,0)){
+              if(!socket.proto.moderator){try{selectedSocket.proto.name=selectedSocket.proto.name.replace('$','');}catch(e){logger.ERROR(e)}}
               newname=message.split(' ')[1].replace(0,0).substr(0,30);
               if (queryKeys({
                 name:message.split(' ')[1],
@@ -441,9 +489,12 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               },true).length===0&& newname !== 'server'){
                 if(socket.proto.admin){
                   socket.proto.name='@'+newname;
-                } else{
+                }else if(socket.proto.moderator){
+                  socket.proto.name='$'+newname;
+                }else{
                   socket.proto.name=newname;
                 }
+                
                 toRoom(socket.proto.room).emit('message',{
                   name: 'server',
                   message: `${name} is now known as ${socket.proto.name}`,
@@ -465,7 +516,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             break;
           case config.chat.commandprefix+'?':
             if((message.split(' ')[1]==='op')&&(socket.proto.admin)){fs.readFile('assets/opcmd.txt','utf8',(err,file) =>{socket.emit('message',{name: 'server',message: file});});}
-            if(!socket.proto.admin){socket.emit('message',{name:server,message:'error: not an admin or moderator'})}
+            if(!socket.proto.admin){socket.emit('message',{name:'server',message:'error: not an admin or moderator'})}
             fs.readFile('assets/cmd.txt','utf8',(err,file) =>{
               socket.emit('message',{
                 name: 'server',
@@ -498,14 +549,14 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             });
         }
       } else{
-         enablesend=true;
         //       for (let i=0;i<cussWords.length;i++){
         //         //https://www.npmjs.com/package/swearjar
           
         // }
-        if(message.includes('/key')!==true){
+        // if(message.includes(config.chat.commandprefix+'key')!==true){
+          if(true){
 
-          /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+message+'\n');}else if(message.includes('/key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+message+'\n');}
+          /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+message+'\n');}else if(message.includes(config.chat.commandprefix+'key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+message+'\n');}
       
         toRoom(socket.proto.room).emit('message',{
           name: socket.proto.name,
@@ -514,7 +565,6 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
           platform:platform
         });
         }
-        enablesend=true;
     }
     }
   );

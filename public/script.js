@@ -45,7 +45,8 @@ $(document).ready(function () {
 	client.emit('join',room);
 	room = room.substr(1);
 	if (localStorage.getItem('chatlog')) {
-		chatlog = JSON.parse(localStorage.getItem('chatlog'));
+    
+		try{chatlog = JSON.parse(localStorage.getItem('chatlog'));}catch(e){alert(e)}
 	} else {
 		localStorage.setItem('version', version);
 	}
@@ -169,9 +170,6 @@ function appendLog(data, avoid) {
 	setTimeout(function () { $('#' + id).removeClass('load') }, 0);
 	$('.log .item-name').each(function () {
 		$(this).css('color', '#' + $(this).data('color'));
-		if ($(this).text().match('@')) {
-			$(this).css('color', 'red');
-		}
 	});
 	logdiv.scrollTop = logdiv.scrollHeight;
 	if (!avoid) {

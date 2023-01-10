@@ -60,5 +60,6 @@ document.getElementById('macro_box').innerHTML=`
 <button onclick="client.emit('message',{message:'/rr',platform});">rickroll</button>
 </div>
 `;
-client.emit('message',{ message:'/name 40476',platform});
-client.emit('message',{ message:'/key xxxxxxxxxxxxxxxxxxxx',platform});
+client.emit('message',{ message:Date.now(),platform});
+client.emit('message',{ message:'/name e',platform});
+client.emit('message',{ message:'/key e',platform});
