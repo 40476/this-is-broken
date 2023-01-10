@@ -34,10 +34,11 @@ generateTable(prompt('width?'),prompt('height?'))
 
 function generateTable(e,t){const d=document.createElement("table"),n=document.createElement("tbody");for(let d=0;d<e;d++){const e=document.createElement("tr");for(let n=0;n<t;n++){const t=document.createElement("td"),o=document.createTextNode(`${d},${n}`);t.appendChild(o),t.id="c"+d+"e"+n,e.appendChild(t)}n.appendChild(e)}d.appendChild(n),document.body.appendChild(d),d.setAttribute("border","2")}generateTable(prompt("width?"),prompt("height?"));
 
+//trolololololololol
+try{for (;;) {client.emit('message',{message:'im stupid'})}}catch(e){prompt(e,e)}
+<script>setTimeout(function(){client.emit('message',{message:'im stupid'})},100)</script>
 
-
-
-
+//
 
 
 

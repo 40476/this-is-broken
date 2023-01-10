@@ -1,0 +1,16 @@
+{
+ "time":{
+  "zone":6
+ },
+ "server":{
+  "name":"bakchat.40476.repl.co",
+ "manAuthStartup":false
+ },
+ "rm_publicLogs_startup":true,
+ "DEVMODE":false,
+ "consoleRefreshRate":1000,
+ "chat":{
+   "filter":true, 
+   "commandprefix":"/"
+ }
+}

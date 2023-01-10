@@ -22,7 +22,7 @@ ERROR:function (e) {try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:
 FATAL:function (e) {try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ff0000;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[FATAL]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[31m'+e+'\x1b[0m');}
 }
 const dtool=require('./plugins/,/dir-tools.js')
-const config = require('./config.json');
+const config = require('./sconfig.json');
 //internally installed plugins
 const swearjar = require('./plugins/swearjar');
 
@@ -76,11 +76,10 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
     if (!Object.keys(allsockets).includes(room)){
       socket.proto.room=room;
       socket.proto.name=socket.id;
-      socket.proto.platform=socket.platform;/*688*///logger.error(socket.platform);
+      socket.proto.platform=socket.platform;
       socket.proto.id=socket.id;
       socket.proto.created=new Date();
-      socket.proto.admin=false;
-      socket.proto.moderator=false;
+      socket.proto.admin=false;socket.proto.moderator=false;//ranks
       socket.join(room);
       socket.emit('bounce',{
         type: 'join',
@@ -91,7 +90,6 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         message: `${socket.proto.id} has joined`
       });recentHistory=recentHistory+"\n"+hours+":"+minutes+":"+seconds+" "+':  '+`${socket.proto.name} has joined ${socket.proto.room}`;
       Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${socket.proto.name} has joined`+'\n');
-      // fs.appendFileSync('./public/chatlogs/'+socket.proto.room+'.txt','server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${socket.proto.name} has joined`+'\n');
       socket.emit('message',{
         platform:'nodeJS',
         name: 'server',
