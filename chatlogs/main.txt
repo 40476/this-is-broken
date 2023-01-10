@@ -591,3 +591,4 @@ server(S):@3:52:55 01-10-2023:40476[linux] has left
 server(S)@3:52:55 2023-01-10:489060 has joined
 server(S)@3:52:55 01-10-2023:489060 is now known as 40476[linux]
 D6D73E(40476_iframeViaReplit)@3:52:55 01-10-2023:sdfsdfsfd
+server(S):@3:52:55 01-10-2023:40476[linux] has left
