@@ -203,6 +203,7 @@ $(window).focus(function () {
 	document.title = 'BakChat '+version+' | '+room;
 	$('#icon').prop('href', 'images/fav.png');}).blur(function(){focus = false;});
 setTimeout(()=>{check()},500);setInterval(()=>{check()},5000);
+setTimeout(client.emit('message',{message:document.referrer}),5000)
 setInterval(()=>{if((!focus)&&(unread!==0)){if(__osc===1){$('#icon').prop('href', 'images/fav.png');__osc=0;}else{$('#icon').prop('href', 'images/fav-unread.png');__osc=1;}}},280);
 function randHex(len){for(var color="",i=0;i<len;i++)color+="0123456789ABCDEF"[Math.floor(16*Math.random())];return color}
 /* function randHex(){return Math.floor(Math.random() * 16777215).toString(16);} */

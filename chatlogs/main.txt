@@ -598,3 +598,63 @@ server(S)@5:39:31 2023-01-10:620D12 has joined
 server(S)@5:39:31 01-10-2023:620D12 is now known as 40476[linux]
 620D12(40476[linux])@5:39:31 01-10-2023:s
 server(S):@5:39:31 01-10-2023:40476[linux] has left
+server(S)@5:39:31 2023-01-10:164FCD has joined
+server(S)@5:39:31 01-10-2023:164FCD is now known as 40476[linux]
+server(S):@5:39:31 01-10-2023:40476_iframeViaReplit has left
+server(S):@5:39:31 01-10-2023:40476[linux] has left
+server(S)@6:4:8 2023-01-10:451082 has joined
+server(S)@6:4:8 2023-01-10:B464DE has joined
+451082(451082)@6:4:8 01-10-2023:wyd
+451082(451082)@6:4:8 01-10-2023:people of the chat
+server(S):@6:4:8 01-10-2023:451082 has left
+server(S):@6:4:8 01-10-2023:B464DE has left
+server(S):@6:4:8 01-10-2023:0137A4 has left
+server(S)@6:4:8 2023-01-10:2B0C51 has joined
+server(S):@6:4:8 01-10-2023:2B0C51 has left
+server(S):@6:4:8 01-10-2023:AF19BF has left
+server(S)@6:4:8 2023-01-10:7FE71E has joined
+server(S):@6:4:8 01-10-2023:7FE71E has left
+server(S)@6:4:8 2023-01-10:BDC3BA has joined
+BDC3BA(BDC3BA)@6:4:8 01-10-2023:Nice. This is pretty cool
+server(S):@6:4:8 01-10-2023:BDC3BA has left
+server(S)@6:4:8 2023-01-10:B320FB has joined
+server(S):@6:4:8 01-10-2023:B320FB has left
+server(S)@6:4:8 2023-01-10:0030E6 has joined
+server(S):@6:4:8 01-10-2023:0030E6 has left
+server(S)@6:4:8 2023-01-10:A51EC9 has joined
+server(S):@6:4:8 01-10-2023:A51EC9 has left
+server(S):@-6:31:29 01-11-2023:C46D99 has left
+server(S)@-6:31:29 2023-01-11:9A031B has joined
+server(S)@-6:31:29 01-11-2023:9A031B is now known as 40476_iframeViaReplit
+server(S):@-6:31:29 01-11-2023:40476_iframeViaReplit has left
+server(S)@-6:31:29 2023-01-11:CF887C has joined
+server(S)@-6:31:29 01-11-2023:CF887C is now known as 40476_iframeViaReplit
+server(S):@-6:31:29 01-11-2023:40476_iframeViaReplit has left
+server(S)@-6:31:29 2023-01-11:ED2FF7 has joined
+server(S)@-6:31:29 01-11-2023:ED2FF7 is now known as 40476_iframeViaReplit
+server(S)@-5:9:17 2023-01-11:114690 has joined
+server(S)@-5:9:17 01-11-2023:114690 is now known as 40476_iframeViaReplit
+server(S)@-5:9:48 2023-01-11:6DC360 has joined
+server(S)@-5:9:48 01-11-2023:6DC360 is now known as 40476_iframeViaReplit
+6DC360(40476_iframeViaReplit)@-5:9:48 01-11-2023:d
+server(S):@-5:9:48 01-11-2023:639869 has left
+612697(612697)@-5:9:48 01-11-2023:https://replit.com/
+server(S)@-5:9:48 2023-01-11:612697 has joined
+server(S)@-5:9:48 01-11-2023:612697 is now known as 40476[linux]
+server(S):@-5:9:48 01-11-2023:40476[linux] has left
+B668A3(B668A3)@-5:9:48 01-11-2023:https://replit.com/
+server(S)@-5:9:48 2023-01-11:B668A3 has joined
+server(S)@-5:9:48 01-11-2023:B668A3 is now known as 40476[linux]
+B668A3(40476[linux])@-5:9:48 01-11-2023:1673399640541
+server(S)@-5:9:48 01-11-2023:B668A3 is now known as 40476
+B668A3(40476)@-5:9:48 01-11-2023:dfg
+server(S):@-5:9:48 01-11-2023:40476_iframeViaReplit has left
+server(S):@-5:9:48 01-11-2023:40476 has left
+server(S)@-5:9:48 2023-01-11:686748 has joined
+server(S)@-5:9:48 01-11-2023:686748 is now known as 40476_iframeViaReplit
+server(S)@-5:17:44 2023-01-11:528804 has joined
+server(S)@-5:17:44 01-11-2023:528804 is now known as 40476_iframeViaReplit
+server(S):@-5:17:44 01-11-2023:75DE58 has left
+server(S):@-5:17:44 01-11-2023:40476_iframeViaReplit has left
+server(S)@-5:17:44 2023-01-11:FD4305 has joined
+server(S)@-5:17:44 01-11-2023:FD4305 is now known as 40476_iframeViaReplit

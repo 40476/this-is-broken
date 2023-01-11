@@ -1,6 +1,6 @@
-server(S)@5:39:31 2023-01-10:5B8611 has joined
-server(S)@5:39:31 01-10-2023:5B8611 is now known as 40476_iframeViaReplit
-server(S)@5:39:31 2023-01-10:620D12 has joined
-server(S)@5:39:31 01-10-2023:620D12 is now known as 40476[linux]
-620D12(40476[linux])@5:39:31 01-10-2023:s
-server(S):@5:39:31 01-10-2023:40476[linux] has left
+server(S)@-5:17:44 2023-01-11:528804 has joined
+server(S)@-5:17:44 01-11-2023:528804 is now known as 40476_iframeViaReplit
+server(S):@-5:17:44 01-11-2023:75DE58 has left
+server(S):@-5:17:44 01-11-2023:40476_iframeViaReplit has left
+server(S)@-5:17:44 2023-01-11:FD4305 has joined
+server(S)@-5:17:44 01-11-2023:FD4305 is now known as 40476_iframeViaReplit

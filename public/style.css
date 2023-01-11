@@ -1,11 +1,11 @@
-@import "https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700";
+/* @import "https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700"; */
 
 html,body,.site,.app {
 margin:0;
 padding:0;
 width:100vw;
 height:100vh;
-font-family:ubuntu;
+font-family:arial;
 
 }
 
@@ -285,8 +285,9 @@ font-size:18px
 
 /* The Close Button */
 .close {
-  color: #aaa;
+  color: #aaaaaa;
   float: right;
   font-size: 100px;
   font-weight: bold;
 }
+::-moz-selection {background: #0000FF;}::selection{background:#0000FF;}
