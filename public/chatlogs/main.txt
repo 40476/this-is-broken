@@ -1,6 +1,3 @@
-server(S)@-5:17:44 2023-01-11:528804 has joined
-server(S)@-5:17:44 01-11-2023:528804 is now known as 40476_iframeViaReplit
-server(S):@-5:17:44 01-11-2023:75DE58 has left
-server(S):@-5:17:44 01-11-2023:40476_iframeViaReplit has left
-server(S)@-5:17:44 2023-01-11:FD4305 has joined
-server(S)@-5:17:44 01-11-2023:FD4305 is now known as 40476_iframeViaReplit
+server(S)@5:31:5 2023-01-11:EC5E70 has joined
+server(S)@5:31:5 01-11-2023:EC5E70 is now known as uptime-robot
+server(S):@5:31:5 01-11-2023:B43083 has left

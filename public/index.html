@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width">
     <title>initalizing...</title>
     <style id="sheetControl">:root{--borderRad:0px;}</style>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="/../themes/css.css" rel="stylesheet" type="text/css" /><
+    <div id="themeSheet"><link href="/../themes/normal.css" rel="stylesheet" type="text/css" /></div>
 		<link rel="shortcut icon" href="images/fav.png" id="icon" />
   </head>
   <body>
@@ -20,21 +21,29 @@
       <button id='setting-button'onclick="ecomode();">ECO MODE</button>
       <input id="borderRadius_control"type="number"value="0"min="0"max="60"style="width:40px">
 		  <div>audio notifications<select id="audio"type=""checked>
-      <option>ting.mp3</option>
-      <option>whatsapp whistle.wav</option>
-      <option>E.wav</option>
-      <option>bruh.wav</option>
-      <option>error.wav</option>
-      <option>taco bell.wav</option>
-      <option>amogus_emergency.wav</option>
-      <option>fart.wav</option>
-      <option>oof.wav</option>
-      <option>honk.wav</option>
-      <option>quack.wav</option>
-      <option>*disable*</option>
-<!--       <option><input type="text"placeholder="custom"></option> -->
-      
+        <option>ting.mp3</option>
+        <option>whatsapp whistle.wav</option>
+        <option>E.wav</option>
+        <option>bruh.wav</option>
+        <option>error.wav</option>
+        <option>taco bell.wav</option>
+        <option>amogus_emergency.wav</option>
+        <option>fart.wav</option>
+        <option>oof.wav</option>
+        <option>honk.wav</option>
+        <option>quack.wav</option>
+        <option>*disable*</option>
       </select></div>
+      <div>theme
+        <select id="themeSelect">
+          <option>normal.css</option>
+<!--           <option>.css</option>
+          <option>.css</option>
+          <option>.css</option>
+          <option>.css</option> -->
+          
+        </select>
+      </div>
       <div id="login">
         username<br><input id="username"type="text">
         password<br><input id="password"type="password">
