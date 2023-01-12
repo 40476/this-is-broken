@@ -2,14 +2,14 @@
 
 
 
-# BakChat version 1.4.6 config update
+# BakChat version 1.6.3 command update
 
 BakChat is a multipurpose & lightweight chat application written in nodeJS. BakChat has a very similar Ui and backbone compared to "LowChat", then I decided to make it better... AND LOOK AT IT NOW 
 
 DONT FLAG ME FOR THE CUSSWORDS FILTER ON LINE 29
 ## Demo
 i know the video is broken but it almost murdered my RAM since it was full HD ðŸ˜‚
-![Alt Text](README/demo.gif)
+![test video](README/demo.gif)
 
 ## Developers:
 [@40476](https://replit.com/@40476) Lead Developer \
@@ -21,4 +21,4 @@ i know the video is broken but it almost murdered my RAM since it was full HD ðŸ
 [404 page by sarazond](https://codepen.io/sarazond/pen/jOKyjZ)
 ## Admin instructions
 * Censored chat messages will not be sent
-* bad word filter currently cannot be be turned off due to me needing to go to sleep
+* 
