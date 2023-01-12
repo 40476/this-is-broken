@@ -1,13 +1,2 @@
-server(S)@-6:40:49 2023-01-12:DE37E0 has joined
-server(S)@-6:40:49 01-12-2023:DE37E0 is now known as uptime-robot
-server(S):@-6:40:49 01-12-2023:uptime-robot has left
-server(S)@-6:40:49 2023-01-12:4DCE51 has joined
-server(S)@-6:40:49 01-12-2023:4DCE51 is now known as uptime-robot
-server(S):@-6:40:49 01-12-2023:uptime-robot has left
-server(S)@-6:40:49 2023-01-12:826E6D has joined
-server(S)@-6:40:49 01-12-2023:826E6D is now known as uptime-robot
-server(S):@-6:40:49 01-12-2023:uptime-robot has left
-server(S)@-6:40:49 2023-01-12:CFF996 has joined
-server(S)@-6:40:49 01-12-2023:CFF996 is now known as uptime-robot
-server(S)@-6:40:49 01-12-2023:CFF996 is now known as 40476
-server(S)@-6:40:49 01-12-2023:CFF996 is now known as 40476_viaReplit
+server(S)@5:20:43 2023-01-12:72D8EB has joined
+server(S)@5:20:43 01-12-2023:72D8EB is now known as inactive_user

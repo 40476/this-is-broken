@@ -39,7 +39,7 @@ var version=fs.readFileSync('./public/assets/version.txt');
 var versionInfo=`BakChat version `+version+` -- as PID:`+process.pid+` on `+process.platform+`\n\n`+fs.readFileSync('assets/credits.txt')+`\n-------------------`;
 console.log(versionInfo);
 
-  /*I768*/var recentHistory="",bar="",consoleLastRefresh;
+  /*I768*/var recentHistory="",bar="",consoleLastRefresh,mtxsr;
 app.use(bodyParser.json());app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());app.use(express.static('public'));
 app.get('/',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
@@ -63,7 +63,7 @@ function RemoveFirstLine(text){var lines = text.split('\n');lines.splice(0,1);re
 function queryKeys(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets;for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?Object.keys(ret):Object.keys(main)}
   
 if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./public/chatlogs');setTimeout(function(){makeFolder('./public/chatlogs')},50);}
-  setInterval(function(){console.clear();bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+"-{"+((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)+" & "+Math.trunc((Date.now()-initTime)/1000)+"}["+config.server.name+"]\n"+bar+recentHistory);consoleLastRefresh=Date.now();},config.consoleRefreshRate);
+  setInterval(function(){console.clear();if((((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)*-1)<0){mtxsr='\x1b[41m'}else{mtxsr='\x1b[42m'};bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+" -{"+mtxsr+(((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)*-1)+"\x1b[0m & "+Math.trunc((Date.now()-initTime)/1000)+"}["+config.server.name+"]\n"+bar+recentHistory);consoleLastRefresh=Date.now();},config.consoleRefreshRate);
 
   io.on('connection',(socket) =>{
   socket.on('join',(data) =>{
