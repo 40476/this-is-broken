@@ -204,56 +204,12 @@ $(window).focus(function () {
 	unread = 0;
 	document.title = 'BakChat '+version+' | '+room;
 	$('#icon').prop('href', 'images/fav.png');}).blur(function(){focus = false;});
-setTimeout(()=>{check()},500);setInterval(()=>{check()},5000);
-setTimeout(client.emit('message',{message:document.referrer}),5000)
-
+setTimeout(()=>{check()},500);
+setInterval(()=>{check()},60000);
 setInterval(()=>{if((!focus)&&(unread!==0)){if(__osc===1){$('#icon').prop('href', 'images/fav.png');__osc=0;}else{$('#icon').prop('href', 'images/fav-unread.png');__osc=1;}}},280);
 function randHex(len){for(var color="",i=0;i<len;i++)color+="0123456789ABCDEF"[Math.floor(16*Math.random())];return color}
 /* function randHex(){return Math.floor(Math.random() * 16777215).toString(16);} */
 
-/*SWIPE CODE*/
-window.addEventListener('load', function() {
-	var start = {};
-	var end = {};
-	var tracking = false;
-	var thresholdTime = 500;
-	var thresholdDistance = 100;
-	var o = document.getElementById('menuBTN');
-	gestureStart = function(e) {
-		tracking = true;
-		/* Hack - would normally use e.timeStamp but it's whack in Fx/Android */
-		start.t = new Date().getTime();
-		start.x = e.clientX;
-		start.y = e.clientY;
-	};
-	gestureMove = function(e) {
-		if (tracking) {
-			e.preventDefault();
-			end.x = e.clientX;
-			end.y = e.clientY;
-		}
-	}
-	gestureEnd = function(e) {
-		if (tracking) {
-			tracking = false;
-			var now = new Date().getTime();
-			var deltaTime = now - start.t;
-			var deltaX = end.x - start.x;
-			var deltaY = end.y - start.y;
-			/* work out what the movement was */
-			if (deltaTime > thresholdTime) {
-				/* gesture too slow */return;}else{
-				if ((deltaX > thresholdDistance)&&(Math.abs(deltaY) < thresholdDistance)) {
-					openNav();/*right*/
-				} else if ((-deltaX > thresholdDistance)&&(Math.abs(deltaY) < thresholdDistance)) {
-					openNav();/*left*/
-				} else if ((deltaY > thresholdDistance)&&(Math.abs(deltaX) < thresholdDistance)) {
-					openNav();/*down*/
-				} else if ((-deltaY > thresholdDistance)&&(Math.abs(deltaX) < thresholdDistance)) {
-					openNav();/*up*/
-				} else {
-					/*idk*/
-				}}}};o.addEventListener('pointerdown', gestureStart, false);o.addEventListener('pointermove', gestureMove, false);o.addEventListener('pointerup', gestureEnd, false);o.addEventListener('pointerleave', gestureEnd, false);o.addEventListener('pointercancel', gestureEnd, false);}, false);
 
 
 document.getElementById("advert").innerHTML=randAd();

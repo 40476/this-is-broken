@@ -5,6 +5,5 @@
 /unmute [user]<br>
 /ban [user]<br>
 /unban [user]<br>
-/restart<br>
 /post [user] [message]<br>
-rickroll --> /rr<br>
+rickroll /rr<br>

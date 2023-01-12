@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width">
     <title>initalizing...</title>
     <style id="sheetControl">:root{--borderRad:0px;}</style>
-    <link href="/../themes/css.css" rel="stylesheet" type="text/css" /><
-    <div id="themeSheet"><link href="/../themes/normal.css" rel="stylesheet" type="text/css" /></div>
-		<link rel="shortcut icon" href="images/fav.png" id="icon" />
+    <link href="/../themes/css.css" rel="stylesheet" type="text/css" />
+		<link rel="icon" href="/../images/fav.png" type="image/x-icon"id="icon"/>
   </head>
   <body>
 <div id="myModal" class="modal"><div class="modal-content"><span class="close">&times;</span><p id="advert"></p></div></div>
@@ -16,9 +15,9 @@
     <div id="mySidenav" class="sidenav">
       <button class="closebtn" onclick="closeNav()">&times;</button><br><br>
       
-      <button id='setting-button' onclick="light();">LIGHT</button>
-      <button  id='setting-button'onclick="dark();">DARK</button>
-      <button id='setting-button'onclick="ecomode();">ECO MODE</button>
+      <button id="setting-button"onclick="light();">LIGHT</button>
+      <button id="setting-button"onclick="dark();">DARK</button>
+      <button id="setting-button"onclick="ecomode();">ECO MODE</button>
       <input id="borderRadius_control"type="number"value="0"min="0"max="60"style="width:40px">
 		  <div>audio notifications<select id="audio"type=""checked>
         <option>ting.mp3</option>
@@ -37,10 +36,6 @@
       <div>theme
         <select id="themeSelect">
           <option>normal.css</option>
-<!--           <option>.css</option>
-          <option>.css</option>
-          <option>.css</option>
-          <option>.css</option> -->
           
         </select>
       </div>
@@ -69,5 +64,6 @@
 		<script>function ecomode(){document.write("<iframe src='"+document.location+"'width='100%'style='height:100%;'></iframe>");}</script><script>const css=`html{-webkit-filter:invert(100%);-moz-filter:invert(100%);-o-filter:invert(100%);-ms-filter:invert(100%);}`;const head=document.head;const style=document.createElement('style');style.type='text/css';if(style.styleSheet){style.styleSheet.cssText=css;}else{style.appendChild(document.createTextNode(css));}function light(){head.appendChild(style);}function dark(){head.removeChild(style);}</script>
     <script src="assets/query.js"></script>
     <script src="script.js"></script>
-  </body>
+<div id="themeSheet"><link href="/../themes/normal.css" rel="stylesheet" type="text/css" /></div>
+      </body>
 </html>
