@@ -179,8 +179,8 @@ function appendLog(data, avoid) {
 			chatlog[room] = [];
 		}
 		chatlog[room].push(data);
-    if(chatlog[room].length<(1/0)){
-			chatlog[room] = chatlog[room].slice(chatlog[room].length - 1000);
+    if(chatlog[room].length>3000){
+			chatlog[room] = chatlog[room].slice(chatlog[room].length - 3000);
 		}
     
 		localStorage.setItem('chatlog',JSON.stringify(chatlog));

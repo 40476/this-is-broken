@@ -1,3 +1,4 @@
+//https://glitch.com/edit/console.html?fab6f12a-cc0d-49a0-87eb-6d8905893e59
 const initTime=Date.now();
 const express=require('express');
 const app=express();
@@ -14,12 +15,12 @@ const db=new JSONdb('db.json');
 // self made plugins
 // const logger = require('./plugins/,/logger.js');
 const logger={
-trace:function (e) {try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#00ee00;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[trace]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[32m'+e+'\x1b[0m');},
-debug:function (e) {try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#0022ff;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[debug]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[36m'+e+'\x1b[0m');},
-info:function (e) {try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ffffff;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[info]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[97m'+e+'\x1b[0m');},
-WARN:function (e) {try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ff9900;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[WARN]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[33m'+e+'\x1b[0m');},
-ERROR:function (e) {try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ad6e00;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[ERROR]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[93m'+e+'\x1b[0m');},
-FATAL:function (e) {try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ff0000;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[FATAL]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[31m'+e+'\x1b[0m');}
+trace:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#00ee00;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[trace]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[32m'+e+'\x1b[0m');},
+debug:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#0022ff;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[debug]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[36m'+e+'\x1b[0m');},
+info:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ffffff;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[info]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[97m'+e+'\x1b[0m');},
+WARN:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ff9900;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[WARN]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[33m'+e+'\x1b[0m');},
+ERROR:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ad6e00;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[ERROR]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[93m'+e+'\x1b[0m');},
+FATAL:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ff0000;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[FATAL]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[31m'+e+'\x1b[0m');}
 }
 const dtool=require('./plugins/,/dir-tools.js')
 const config = require('./sconfig.json');
@@ -56,14 +57,14 @@ function makeFolder(dir){!fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: t
 function delFolder(dir){fs.readdir(dir, (err, files) => {if (err) throw err;for (let file of files) fs.unlink(dir+'/'+file,(err)=>{if (err) throw err;});return fs.rmdir(dir,(err) => {if (err) throw err;logger.trace('folder "'+dir+'" deleted')});});}
 function urmom(file) {db.set(file,{name:file});fs.appendFileSync('./public/logs.html','<a href="/../chatlogs/'+file+'">'+file+'</a><br>');}
 function Tolog(room,data){fs.appendFileSync('./public/chatlogs/'+room+'.txt',data);fs.appendFileSync('./chatlogs/'+room+'.txt',data)}
-function restart() {logger.fatal('admin command trigger-> restart');process.on("exit",function(){require("child_process").spawn(process.argv.shift(),process.argv,{cwd:process.cwd(),detached : true,stdio: "inherit"});});process.exit();}
+function restart() {logger.FATAL('admin command trigger-> restart');process.on("exit",function(){require("child_process").spawn(process.argv.shift(),process.argv,{cwd:process.cwd(),detached : true,stdio: "inherit"});});process.exit();}
 function query(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets,defaults(db,!0);for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?ret:main}
 function linez(str){var str_arr = str.split('\n');var newline_length = str_arr.length;return newline_length;}
 function RemoveFirstLine(text){var lines = text.split('\n');lines.splice(0,1);return lines.join('\n');}
 function queryKeys(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets;for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?Object.keys(ret):Object.keys(main)}
   
 if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./public/chatlogs');setTimeout(function(){makeFolder('./public/chatlogs')},50);}
-  setInterval(function(){console.clear();if((((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)*-1)<0){mtxsr='\x1b[41m'}else{mtxsr='\x1b[42m'};bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){if(linez(recentHistory)===(process.stdout.rows-4)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+" -{"+mtxsr+(((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)*-1)+"\x1b[0m & "+Math.trunc((Date.now()-initTime)/1000)+"}["+config.server.name+"]\n"+bar+recentHistory);consoleLastRefresh=Date.now();},config.consoleRefreshRate);
+  setInterval(function(){console.clear();if((((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)*-1)<0){mtxsr='\x1b[41m'}else{mtxsr='\x1b[42m'};bar="";for(let i=0;i<process.stdout.columns;i++){bar=bar+"-"};for (let i=0;i<linez(recentHistory);i++){if(linez(recentHistory)>(process.stdout.rows-3)){recentHistory=RemoveFirstLine(recentHistory)}}console.log(version+" - "+Date.now()+" -{"+mtxsr+(((Date.now()-consoleLastRefresh)-config.consoleRefreshRate)*-1)+"\x1b[0m & "+Math.trunc((Date.now()-initTime)/1000)+"}["+config.server.name+"]\n"+bar+recentHistory);consoleLastRefresh=Date.now();},config.consoleRefreshRate);
 
   io.on('connection',(socket) =>{
   socket.on('join',(data) =>{
@@ -88,7 +89,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         name: 'server',
         message: `${socket.proto.id} has joined`
       });recentHistory=recentHistory+"\n"+hours+":"+minutes+":"+seconds+" "+':  '+`${socket.proto.name} has joined ${socket.proto.room}`;
-      Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${socket.proto.name} has joined`+'\n');
+      Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+`${socket.proto.name} has joined`+'\n');
       socket.emit('message',{
         platform:'nodeJS',
         name: 'server',
@@ -156,7 +157,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
 
 
             
-          case config.chat.commandprefix+'account':fs.writeFileSync('./public/accounts/'+message.split(' ')[1]+'.txt',sha256(message.split(' ')[2]));break;
+          // case config.chat.commandprefix+'account':fs.writeFileSync('./public/accounts/'+message.split(' ')[1]+'.txt',sha256(message.split(' ')[2]));break;
           /*credits*/case '/credits':socket.emit('message',{name: 'server',message: `BakChat version `+version+'<br><pre>'+fs.readFileSync('assets/credits.txt')+'</pre>'});break;
             //ban-----------------------------------------------------------------------------------------------
           case config.chat.commandprefix+'ban':
@@ -165,12 +166,14 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               room: room
             },true);
             selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
-            if (socket.proto.admin||socket.proto.moderator||socket.proto.owner){
+            if (socket.proto.admin||socket.proto.owner){
               if (selectedSocket){
                 selectedSocket.disconnect();
                 fs.writeFileSync('public/bans/'+message.split(' ')[1]+'.txt','banned');
                 // console.log(selectedSocket+'has been banned');
-                toRoom(room).emit('message',{name:'server',message:selectedSocket+'has been banned'});
+                toRoom(room).emit('message',{name:'server',message:selectedSocket.proto.name+'has been banned'});
+                Tolog(room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} has been banned`+'\n');
+                
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -188,8 +191,9 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               room: room
             },true);
             selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
-            if (socket.proto.admin||socket.proto.moderator||socket.proto.owner){
-                try{fs.unlink('public/bans/'+message.split(' ')[1]+'.txt');toRoom(room).emit('message',{name:'server',message:`${message.split(' ')[1]} has been unbanned`});}catch(e){logger.warn(e+'<br>'+this);socket.emit('message',{name:'server',message:`Error: user "${message.split(' ')[1]}" is not banned`});}
+            if (socket.proto.admin||socket.proto.owner){
+                try{fs.unlink('public/bans/'+message.split(' ')[1]+'.txt');toRoom(room).emit('message',{name:'server',message:`${message.split(' ')[1]} has been unbanned`});}catch(e){logger.WARN(e+'<br>'+this);socket.emit('message',{name:'server',message:`Error: user "${message.split(' ')[1]}" is not banned`});}
+              Tolog(room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${socket.proto.name} has been unbanned`+'\n');
             } else{
               socket.emit('message',{name:'server',message:`Error: Invalid credentials`});
             }
@@ -244,6 +248,11 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             if (socket.proto.admin||socket.proto.moderator||socket.proto.owner){
               if (selectedSocket){
                 selectedSocket.disconnect();
+                  toRoom(room).emit('message',{
+                name:message.split(' ')[1],
+                room:room,
+               message:selectedSocket.proto.name+' has been kicked'
+              });
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -286,7 +295,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 toRoom(socket.proto.room).emit('message',{
                   name: 'server',
                   message: `${selectedSocket.proto.name} is no longer an admin`
-                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${selectedSocket.proto.name} is no longer an admin`+'\n');
+                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is no longer an admin`+'\n');
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -300,6 +309,36 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
+            
+            case config.chat.commandprefix+'giveMod':
+            selectedSocket=query({
+              name: message.split(' ')[1],
+              room: room
+            },true);
+            selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
+            if (socket.proto.admin||socket.proto.owner){
+              if (selectedSocket){
+                selectedSocket.proto.admin=true;
+                selectedSocket.proto.name='$'+selectedSocket.proto.name;
+                try{selectedSocket.proto.name=selectedSocket.proto.name.replace('@','');}catch(e){logger.ERROR(e)}
+                toRoom(socket.proto.room).emit('message',{
+                  name: 'server',
+                  message: `${selectedSocket.proto.name} is now an moderator`
+                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is now an moderator`+'\n');
+              } else{
+                socket.emit('message',{
+                  name: 'server',
+                  message: `Error: User ${message.split(' ')[1]} does not exist`
+                });
+              }
+            } else{
+              socket.emit('message',{
+                name: 'server',
+                message: `Error: Invalid credentials`
+              });
+            }
+            break;
+            
             case config.chat.commandprefix+'deMod'://-------------------------------------------remove moderator perm
             selectedSocket=query({
               name: message.split(' ')[1],
@@ -313,7 +352,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 toRoom(socket.proto.room).emit('message',{
                   name: 'server',
                   message: `${selectedSocket.proto.name} is no longer an moderator`
-                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${selectedSocket.proto.name} is no longer an admin`+'\n');
+                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is no longer an admin`+'\n');
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -341,7 +380,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 toRoom(socket.proto.room).emit('message',{
                   name: 'server',
                   message: `${selectedSocket.proto.name} is now an admin`
-                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+`${selectedSocket.proto.name} is now an admin`+'\n');
+                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is now an admin`+'\n');
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -439,7 +478,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               });
             }
             break;
-          case config.chat.commandprefix+'rr':if (socket.proto.admin){toRoom(room).emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});}break;
+          case config.chat.commandprefix+'rr':if (socket.proto.admin||socket.proto.owner){toRoom(room).emit('message',{name:'server',message:`<meta http-equiv="refresh" content="2;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>`});}break;
           case config.chat.commandprefix+'key':
             try{socket.proto.name=socket.proto.name.replace('Θ','');}catch(e){logger.ERROR(e)}//
             try{socket.proto.name=socket.proto.name.replace('$','');}catch(e){logger.ERROR(e)}//remove rank letters
@@ -570,7 +609,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         // if(message.includes(config.chat.commandprefix+'key')!==true){
           if(true){
 
-          /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+message+'\n');}else if(message.includes(config.chat.commandprefix+'key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+year+"-"+month+"-"+date+''+':'+message+'\n');}
+          /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+message+'\n');}else if(message.includes(config.chat.commandprefix+'key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+message+'\n');}
       
         toRoom(socket.proto.room).emit('message',{
           name: socket.proto.name,
