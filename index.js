@@ -38,6 +38,7 @@ function SERV(){if(true){
 setTimeout(function(){
 var version=fs.readFileSync('./public/assets/version.txt');
 var versionInfo=`BakChat version `+version+` -- as PID:`+process.pid+` on `+process.platform+`\n\n`+fs.readFileSync('assets/credits.txt')+`\n-------------------`;
+logger.trace(`server started, as PID:`+process.pid+` on `+process.platform)
 console.log(versionInfo);
 
   /*I768*/var recentHistory="",bar="",consoleLastRefresh,mtxsr;
@@ -53,10 +54,10 @@ function copy(arr){return JSON.parse(JSON.stringify(arr))}
 function occurences(arr){var prev,a=[],b=[];(arr=copy(arr)).sort();for(var i=0;i<arr.length;i++)arr[i]!==prev?(a.push(arr[i]),b.push(1)):b[b.length-1]++,prev=arr[i];return{a:a,b:b}}
 function toRoom(room){return{emit:(type,data)=>{let sockets=queryKeys({room:room});for(let i in sockets)io.to(sockets[i]).emit(type,data)}}}
 function formatHMS(time){let hours=Math.floor(time/1e3/60/60),minutes=Math.floor(time/1e3/60)%60,seconds=Math.floor(time/1e3)%60;return`${hours}h:${minutes<10?"0"+minutes:minutes}m:${seconds<10?"0"+seconds:seconds}s`}
-function makeFolder(dir){!fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true });logger.trace('folder "'+dir+'" created')}
-function delFolder(dir){fs.readdir(dir, (err, files) => {if (err) throw err;for (let file of files) fs.unlink(dir+'/'+file,(err)=>{if (err) throw err;});return fs.rmdir(dir,(err) => {if (err) throw err;logger.trace('folder "'+dir+'" deleted')});});}
+function makeFolder(dir){!fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true });logger.info('folder "'+dir+'" created')}
+function delFolder(dir){fs.readdir(dir, (err, files) => {if (err) throw err;for (let file of files) fs.unlink(dir+'/'+file,(err)=>{if (err) throw err;});return fs.rmdir(dir,(err) => {if (err) throw err;logger.info('folder "'+dir+'" deleted')});});}
 function urmom(file) {db.set(file,{name:file});fs.appendFileSync('./public/logs.html','<a href="/../chatlogs/'+file+'">'+file+'</a><br>');}
-function Tolog(room,data){fs.appendFileSync('./public/chatlogs/'+room+'.txt',data);fs.appendFileSync('./chatlogs/'+room+'.txt',data)}
+function Tolog(room,data){fs.appendFileSync('./public/chatlogs/'+room+'.txt',data);fs.appendFileSync('./chatlogs/'+room+'.txt',data+'<br>\n')}
 function restart() {logger.FATAL('admin command trigger-> restart');process.on("exit",function(){require("child_process").spawn(process.argv.shift(),process.argv,{cwd:process.cwd(),detached : true,stdio: "inherit"});});process.exit();}
 function query(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets,defaults(db,!0);for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?ret:main}
 function linez(str){var str_arr = str.split('\n');var newline_length = str_arr.length;return newline_length;}
@@ -89,7 +90,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         name: 'server',
         message: `${socket.proto.id} has joined`
       });recentHistory=recentHistory+"\n"+hours+":"+minutes+":"+seconds+" "+':  '+`${socket.proto.name} has joined ${socket.proto.room}`;
-      Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+`${socket.proto.name} has joined`+'\n');
+      Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+`${socket.proto.name} has joined`);
       socket.emit('message',{
         platform:'nodeJS',
         name: 'server',
@@ -172,7 +173,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 fs.writeFileSync('public/bans/'+message.split(' ')[1]+'.txt','banned');
                 // console.log(selectedSocket+'has been banned');
                 toRoom(room).emit('message',{name:'server',message:selectedSocket.proto.name+'has been banned'});
-                Tolog(room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} has been banned`+'\n');
+                Tolog(room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} has been banned`);
                 
               } else{
                 socket.emit('message',{
@@ -193,7 +194,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             selectedSocket=selectedSocket[Object.keys(selectedSocket)[0]];
             if (socket.proto.admin||socket.proto.owner){
                 try{fs.unlink('public/bans/'+message.split(' ')[1]+'.txt');toRoom(room).emit('message',{name:'server',message:`${message.split(' ')[1]} has been unbanned`});}catch(e){logger.WARN(e+'<br>'+this);socket.emit('message',{name:'server',message:`Error: user "${message.split(' ')[1]}" is not banned`});}
-              Tolog(room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${socket.proto.name} has been unbanned`+'\n');
+              Tolog(room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${socket.proto.name} has been unbanned`);
             } else{
               socket.emit('message',{name:'server',message:`Error: Invalid credentials`});
             }
@@ -295,7 +296,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 toRoom(socket.proto.room).emit('message',{
                   name: 'server',
                   message: `${selectedSocket.proto.name} is no longer an admin`
-                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is no longer an admin`+'\n');
+                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is no longer an admin`);
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -324,7 +325,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 toRoom(socket.proto.room).emit('message',{
                   name: 'server',
                   message: `${selectedSocket.proto.name} is now an moderator`
-                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is now an moderator`+'\n');
+                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is now an moderator`);
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -352,7 +353,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 toRoom(socket.proto.room).emit('message',{
                   name: 'server',
                   message: `${selectedSocket.proto.name} is no longer an moderator`
-                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is no longer an admin`+'\n');
+                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is no longer an admin`);
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -380,7 +381,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 toRoom(socket.proto.room).emit('message',{
                   name: 'server',
                   message: `${selectedSocket.proto.name} is now an admin`
-                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is now an admin`+'\n');
+                });Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} is now an admin`);
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -553,7 +554,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                   message: `${name} is now known as ${socket.proto.name}`,
                 });
                 recentHistory=recentHistory+"\n"+hours+":"+minutes+":"+seconds+" "+':  '+`${name} is now known as ${socket.proto.name} ROOM --> ${socket.proto.room}`;
-                Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+`${name} is now known as ${socket.proto.name}`+'\n');
+                Tolog(socket.proto.room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+`${name} is now known as ${socket.proto.name}`);
               } else{
                 socket.emit('message',{
                   name: 'server',
@@ -609,7 +610,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         // if(message.includes(config.chat.commandprefix+'key')!==true){
           if(true){
 
-          /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+message+'\n');}else if(message.includes(config.chat.commandprefix+'key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+message+'\n');}
+          /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+message);}else if(message.includes(config.chat.commandprefix+'key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+message);}
       
         toRoom(socket.proto.room).emit('message',{
           name: socket.proto.name,
@@ -628,7 +629,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
         message: `${socket.proto.name} has left`
       });
       recentHistory=recentHistory+"\n"+hours+":"+minutes+":"+seconds+" "+':  '+`${socket.proto.name} has left ${socket.proto.room}`;
-      Tolog(socket.proto.room,'server(S):@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+`${socket.proto.name} has left`+'\n');
+      Tolog(socket.proto.room,'server(S):@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+`${socket.proto.name} has left`);
       
     }
   });

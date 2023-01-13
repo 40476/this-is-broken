@@ -1,10 +1,4 @@
-server(S):@1:31:24 01-13-2023:inactive_user has left
-server(S)@1:31:24 2023-01-13:655C55 has joined
-server(S)@1:31:24 01-13-2023:655C55 is now known as inactive_user
-server(S):@1:31:24 01-13-2023:inactive_user has left
-server(S)@1:31:24 2023-01-13:F2CE1C has joined
-server(S)@1:31:24 01-13-2023:F2CE1C is now known as inactive_user
-server(S)@5:16:28 01-13-2023:82BD52 has joined
-server(S)@5:16:28 01-13-2023:82BD52 is now known as inactive_user
-server(S)@6:17:29 01-13-2023:DE21E3 has joined
-server(S)@6:17:29 01-13-2023:DE21E3 is now known as inactive_user
+server(S)@6:36:14 01-13-2023:C3587E has joined<br>
+server(S)@6:36:14 01-13-2023:C3587E is now known as inactive_user<br>
+server(S):@6:36:14 01-13-2023:E2F65A has left
+<br>
