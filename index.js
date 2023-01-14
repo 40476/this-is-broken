@@ -1,19 +1,5 @@
-//https://glitch.com/edit/console.html?fab6f12a-cc0d-49a0-87eb-6d8905893e59
-const initTime=Date.now();
-const express=require('express');
-const app=express();
-const http=require('http').Server(app);
-const readline = require('readline').createInterface({input: process.stdin,output: process.stdout});
-//TODO: configure to run with multiple ports --> https://stackoverflow.com/questions/19296797/running-node-js-http-server-on-multiple-ports
-const io=require('socket.io').listen(http);
-const bodyParser=require('body-parser');
-const fs=require('fs');console.log(fs.readFileSync('./logo.txt','utf8'));
-const cookieParser=require('cookie-parser');
-const path=require('path');
-const JSONdb = require('simple-json-db');
-const db=new JSONdb('db.json');
-// self made plugins
-// const logger = require('./plugins/,/logger.js');
+const config = require('./sconfig.json');let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.offset;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
+const fs=require('fs');
 const logger={
 trace:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#00ee00;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[trace]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[32m'+e+'\x1b[0m');},
 debug:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#0022ff;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[debug]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[36m'+e+'\x1b[0m');},
@@ -22,15 +8,32 @@ WARN:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ff
 ERROR:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ad6e00;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[ERROR]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[93m'+e+'\x1b[0m');},
 FATAL:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><b style="color:#ff0000;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[FATAL]>>>`+e+`</b>\n`);}catch(e){};console.log('\x1b[31m'+e+'\x1b[0m');}
 }
+
+try{
+const initTime=Date.now();
+const express=require('express');
+const app=express();
+const http=require('http').Server(app);
+const readline = require('readline').createInterface({input: process.stdin,output: process.stdout});
+//TODO: configure to run with multiple ports --> https://stackoverflow.com/questions/19296797/running-node-js-http-server-on-multiple-ports
+const io=require('socket.io').listen(http);
+const bodyParser=require('body-parser');
+console.log(fs.readFileSync('./logo.txt','utf8'));
+const cookieParser=require('cookie-parser');
+const path=require('path');
+const JSONdb = require('simple-json-db');
+const db=new JSONdb('db.json');
+// self made plugins
+// const logger = require('./plugins/,/logger.js');
+
 const dtool=require('./plugins/,/dir-tools.js')
-const config = require('./sconfig.json');
 //internally installed plugins
 const swearjar = require('./plugins/swearjar');
 
 
 
 
-let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.zone;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
+
 
 
 function SERV(){if(true){
@@ -94,7 +97,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
       socket.emit('message',{
         platform:'nodeJS',
         name: 'server',
-        message: 'Welcome to BakChat The server you are currently on is '+config.server.name+'!<br> You are in room "'+socket.proto.room+'".<br>'+fs.readFileSync('assets/join_msg.html')
+        message: 'Welcome to BakChat The server you are currently on is '+config.server.name+'!<br> You are in room "'+socket.proto.room+'".<br>'+fs.readFileSync('assets/join_msg.html')+'<br>the owner of this server is <div id="owner">'+function(o){if(config.server.owner==='getfromreplit'){o=process.env.REPL_OWNER}return o}()+"</div>"
       });
       if(config.DEVMODE){console.log(query({room:room}),socket.proto.room);}
       if (query({
@@ -249,10 +252,10 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             if (socket.proto.admin||socket.proto.moderator||socket.proto.owner){
               if (selectedSocket){
                 selectedSocket.disconnect();
-                  toRoom(room).emit('message',{
-                name:message.split(' ')[1],
+              toRoom(room).emit('message',{
+                name:'server',
                 room:room,
-               message:selectedSocket.proto.name+' has been kicked'
+               message:message.split(' ')[1]+' has been kicked'
               });
               } else{
                 socket.emit('message',{
@@ -546,7 +549,10 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
                 }else if(socket.proto.owner){
                   socket.proto.name='Θ'+newname;
                 }else{
-                  socket.proto.name=newname;
+                  socket.proto.name=newname;                  
+                  try{socket.proto.name=socket.proto.name.replace('Θ','');}catch(e){logger.ERROR(e)}//
+                  try{socket.proto.name=socket.proto.name.replace('$','');}catch(e){logger.ERROR(e)}// remove rank letters
+                  try{socket.proto.name=socket.proto.name.replace('@','');}catch(e){logger.ERROR(e)}//
                 }
                 
                 toRoom(socket.proto.room).emit('message',{
@@ -660,4 +666,8 @@ function defaults(socket,many){
 }}
 
 var sha256=function r(o){function f(r,o){return r>>>o|r<<32-o}for(var t,n,a=Math.pow,c=a(2,32),e="length",i="",h=[],u=8*o[e],v=r.h=r.h||[],l=r.k=r.k||[],s=l[e],g={},k=2;s<64;k++)if(!g[k]){for(t=0;t<313;t+=k)g[t]=k;v[s]=a(k,.5)*c|0,l[s++]=a(k,1/3)*c|0}for(o+="";o[e]%64-56;)o+="\0";for(t=0;t<o[e];t++){if((n=o.charCodeAt(t))>>8)return;h[t>>2]|=n<<(3-t)%4*8}for(h[h[e]]=u/c|0,h[h[e]]=u,n=0;n<h[e];){var d=h.slice(n,n+=16),p=v;for(v=v.slice(0,8),t=0;t<64;t++){var w=d[t-15],A=d[t-2],C=v[0],M=v[4],A=v[7]+(f(M,6)^f(M,11)^f(M,25))+(M&v[5]^~M&v[6])+l[t]+(d[t]=t<16?d[t]:d[t-16]+(f(w,7)^f(w,18)^w>>>3)+d[t-7]+(f(A,17)^f(A,19)^A>>>10)|0);(v=[A+((f(C,2)^f(C,13)^f(C,22))+(C&v[1]^C&v[2]^v[1]&v[2]))|0].concat(v))[4]=v[4]+A|0}for(t=0;t<8;t++)v[t]=v[t]+p[t]|0}for(t=0;t<8;t++)for(n=3;n+1;n--){var S=v[t]>>8*n&255;i+=(S<16?0:"")+S.toString(16)}return i};
-if(config.server.manAuthStartup===false){SERV()}else{readline.question('enter startup passcode:\n> ', function (name) {config.server.authVerify=name;readline.close();});readline.on('close', function () {try{if((config.server.manAuthStartup!==false)&&(sha256(config.server.authVerify)===config.server.manAuthStartup)){SERV()}}catch(e){logger.fatal(e)}});}
+if(config.server.manAuthStartup===false){SERV();}else{logger.trace('!!!waiting for passcode!!!');readline.question('enter startup passcode:\n> ', function (name) {config.server.authVerify=name;readline.close();});readline.on('close', function () {try{if((config.server.manAuthStartup!==false)&&(sha256(config.server.authVerify)===config.server.manAuthStartup)){SERV();logger.trace('!!!passcode accepted!!!');}}catch(e){logger.ERROR(e)}});}
+
+
+
+}catch(e){logger.FATAL(e)}

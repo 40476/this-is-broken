@@ -1,2 +1,1 @@
-server(S)@6:36:14 01-13-2023:D0AEB4 has joinedserver(S)@6:36:14 01-13-2023:D0AEB4 is now known as inactive_userD0AEB4(inactive_user)@6:36:14 01-13-2023:weeserver(S):@6:36:14 01-13-2023:inactive_user has left
-server(S)@6:36:14 01-13-2023:C3587E has joinedserver(S)@6:36:14 01-13-2023:C3587E is now known as inactive_userserver(S):@6:36:14 01-13-2023:E2F65A has left
+server(S)@19:33:13 01-14-2023:2A02D6 has joinedserver(S)@19:33:13 01-14-2023:2A02D6 is now known as inactive_user
