@@ -25,7 +25,6 @@ const JSONdb = require('simple-json-db');
 const db=new JSONdb('db.json');
 // self made plugins
 // const logger = require('./plugins/,/logger.js');
-
 const dtool=require('./plugins/,/dir-tools.js')
 //internally installed plugins
 const swearjar = require('./plugins/swearjar');

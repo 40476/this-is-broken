@@ -707,3 +707,4 @@ server(S)@7:32:34 01-14-2023:6ED627 has joined<br>
 server(S)@7:32:34 01-14-2023:6ED627 is now known as inactive_user<br>
 server(S)@19:33:13 01-14-2023:2A02D6 has joined<br>
 server(S)@19:33:13 01-14-2023:2A02D6 is now known as inactive_user<br>
+server(S):@19:33:13 01-14-2023:E89649 has left<br>
