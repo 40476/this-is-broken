@@ -719,3 +719,6 @@ server(S)@35:53:12 01-15-2023:4CD1B0 is now known as 40476<br>
 server(S):@35:53:12 01-15-2023:40476 has left<br>
 server(S)@35:53:12 01-15-2023:FB08A1 has joined<br>
 server(S)@35:53:12 01-15-2023:FB08A1 is now known as 40476<br>
+server(S):@35:53:12 01-15-2023:40476 has left<br>
+server(S)@35:53:12 01-15-2023:F23C04 has joined<br>
+server(S)@35:53:12 01-15-2023:F23C04 is now known as 40476<br>
