@@ -708,3 +708,14 @@ server(S)@7:32:34 01-14-2023:6ED627 is now known as inactive_user<br>
 server(S)@19:33:13 01-14-2023:2A02D6 has joined<br>
 server(S)@19:33:13 01-14-2023:2A02D6 is now known as inactive_user<br>
 server(S):@19:33:13 01-14-2023:E89649 has left<br>
+server(S)@35:53:12 01-15-2023:171E5C has joined<br>
+server(S)@35:53:12 01-15-2023:171E5C is now known as 40476[linux]<br>
+server(S)@35:53:12 01-15-2023:B22B71 has joined<br>
+server(S)@35:53:12 01-15-2023:B22B71 is now known as 40476<br>
+server(S):@35:53:12 01-15-2023:40476[linux] has left<br>
+server(S):@35:53:12 01-15-2023:40476 has left<br>
+server(S)@35:53:12 01-15-2023:4CD1B0 has joined<br>
+server(S)@35:53:12 01-15-2023:4CD1B0 is now known as 40476<br>
+server(S):@35:53:12 01-15-2023:40476 has left<br>
+server(S)@35:53:12 01-15-2023:FB08A1 has joined<br>
+server(S)@35:53:12 01-15-2023:FB08A1 is now known as 40476<br>
