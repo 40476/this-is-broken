@@ -1,7 +1,7 @@
-!chatlogs/
-!public/chatlogs/
-!node_modules/
-!.upm/
-!package-lock.json
-!.git/
-!.breakpoints
+chatlogs/
+public/chatlogs/
+node_modules/
+.upm/
+package-lock.json
+.git/
+.breakpoints
