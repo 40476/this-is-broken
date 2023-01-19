@@ -1,1 +1,1 @@
-server(S)@31:13:4 01-17-2023:0039AA has joinedserver(S)@31:13:4 01-17-2023:0039AA is now known as 40476
+server(S)@20:23:11 01-19-2023:3DCD08 has joinedserver(S)@20:23:11 01-19-2023:3DCD08 is now known as 40476server(S)@20:23:11 01-19-2023:013873 has joinedserver(S)@20:23:11 01-19-2023:013873 is now known as 40476[linux]3DCD08(40476)@20:23:11 01-19-2023:hserver(S):@20:23:11 01-19-2023:40476[linux] has left

@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>initalizing...</title>
-    <style id="sheetControl">:root{--borderRad:0px;}</style>
+    <style id="sheetControl">:root{--borderRad:0px;--backdrop:#000000;}</style>
     <link href="/../themes/css.css" rel="stylesheet" type="text/css" />
 		<link rel="icon" href="/../images/fav.png" type="image/x-icon"id="icon"/>
   </head>
@@ -19,6 +19,8 @@
       <button id="setting-button"onclick="dark();">DARK</button>
       <button id="setting-button"onclick="ecomode();">ECO MODE</button>
       <input id="borderRadius_control"type="number"value="0"min="0"max="60"style="width:40px">
+      background color<input id="backdrop_colour"type="color">
+      <select id="invis"type=""><option>true</option><option>false</option></select>
 		  <div>audio notifications<select id="audio"type=""checked>
         <option>ting.mp3</option>
         <option>whatsapp whistle.wav</option>

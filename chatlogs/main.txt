@@ -729,3 +729,18 @@ server(S)@36:14:10 01-15-2023:07C4BB has joined<br>
 server(S)@36:14:10 01-15-2023:07C4BB is now known as 40476<br>
 server(S)@31:13:4 01-17-2023:0039AA has joined<br>
 server(S)@31:13:4 01-17-2023:0039AA is now known as 40476<br>
+server(S):@31:13:4 01-17-2023:2AF4EA has left<br>
+server(S)@31:45:25 01-17-2023:CA4A1D has joined<br>
+server(S)@31:45:25 01-17-2023:CA4A1D is now known as 40476<br>
+server(S)@41:24:55 01-17-2023:077C8F has joined<br>
+server(S)@41:24:55 01-17-2023:077C8F is now known as 40476<br>
+server(S):@41:24:55 01-17-2023:40476 has left<br>
+server(S)@20:17:45 01-19-2023:D6AFE9 has joined<br>
+server(S)@20:17:45 01-19-2023:D6AFE9 is now known as 40476[linux]<br>
+server(S):@20:17:45 01-19-2023:40476[linux] has left<br>
+server(S)@20:23:11 01-19-2023:3DCD08 has joined<br>
+server(S)@20:23:11 01-19-2023:3DCD08 is now known as 40476<br>
+server(S)@20:23:11 01-19-2023:013873 has joined<br>
+server(S)@20:23:11 01-19-2023:013873 is now known as 40476[linux]<br>
+3DCD08(40476)@20:23:11 01-19-2023:h<br>
+server(S):@20:23:11 01-19-2023:40476[linux] has left<br>

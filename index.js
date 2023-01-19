@@ -8,7 +8,8 @@ WARN:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><pre><b style="colo
 ERROR:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><pre><b style="color:#ad6e00;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[ERROR]>>>`+e+`</pre></b>\n`);}catch(e){};console.log('\x1b[93m'+e+'\x1b[0m');},
 FATAL:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><pre><b style="color:#ff0000;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[FATAL]>>>`+e+`</pre></b>\n`);}catch(e){};console.log('\x1b[31m'+e+'\x1b[0m');}
 }
-
+/*https://api.durrstudios.ga*/
+/**/
 try{
 const initTime=Date.now();
 const express=require('express');
@@ -34,7 +35,6 @@ const swearjar = require('./plugins/swearjar');
 
 
 
-
 function SERV(){if(true){
   
 setTimeout(function(){
@@ -49,7 +49,7 @@ app.use(cookieParser());app.use(express.static('public'));
 app.get('/',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
 app.get('/:room',(req,res) =>{res.sendFile(__dirname+'/public/index.html');});
 app.get('*',(req,res) =>{res.sendFile(__dirname+'/public/404.html');});
-http.listen(3000,()=> undefined);
+http.listen(3000,()=> versionInfo);
 io.engine.generateId=(req)=>{return randHex(6);};
 function randHex(len){for(var color="",i=0;i<len;i++)color+="0123456789ABCDEF"[Math.floor(16*Math.random())];return color}
 function copy(arr){return JSON.parse(JSON.stringify(arr))}
