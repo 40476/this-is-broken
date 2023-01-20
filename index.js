@@ -530,7 +530,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               if((message.split(' ')[1] !== process.env.MODr)&&(message.split(' ')[1] !== process.env.ADMIN)&&(message.split(' ')[1] !== process.env.OWNER)){
                 socket.emit('message',{
                 name: 'server',
-                message: 'Error: Invalid credentials>>>'+message.split(' ')[1]+' is invalid'
+                message: 'Error: Invalid credentials>>> passcode is invalid'
               });}
             } 
             break;
