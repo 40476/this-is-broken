@@ -23,7 +23,6 @@ const io=require('socket.io').listen(http);
 const bodyParser=require('body-parser');
 console.log(fs.readFileSync('./logo.txt','utf8'));
 const cookieParser=require('cookie-parser');
-const path=require('path');
 const JSONdb = require('simple-json-db');
 const db=new JSONdb('db.json');
 // self made plugins
@@ -596,7 +595,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               }).map(el => sockets[el].proto.name).join(',').replace(socket.proto.name,'<b>$&</b>')
             });
             break;
-          case config.chat.commandprefix+'logs':if(true){fs.readdir(path.resolve(__dirname,'./public/chatlogs/'),(err,files)=>{for(let file of files){urmom(file);}});socket.emit('message',{name:'server',message:'<a href="/../logs.html">logs</a>'});}break;
+          case config.chat.commandprefix+'logs':if(true){fs.readdir(require('path').resolve(__dirname,'./public/chatlogs/'),(err,files)=>{for(let file of files){urmom(file);}});socket.emit('message',{name:'server',message:'<a href="/../logs.html">logs</a>'});}break;
           case config.chat.commandprefix+'rooms':
             rooms=occurences(Object.keys(allsockets).map(el => allsockets[el].proto.room));
             let users=rooms.b;
