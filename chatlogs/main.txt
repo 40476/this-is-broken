@@ -16,3 +16,27 @@ server(S)@30:21:24 01-20-2023:3A7928 is now known as 40476<br>
 server(S)@30:21:51 01-20-2023:29F005 has joined<br>
 server(S)@30:21:51 01-20-2023:29F005 is now known as 40476<br>
 server(S):@30:23:14 01-20-2023:EAD454 has left<br>
+server(S)@30:31:17 01-20-2023:F7110D has joined<br>
+server(S)@30:31:17 01-20-2023:F7110D is now known as 40476<br>
+F7110D(40476)@30:31:39 01-20-2023:bv<br>
+F7110D(40476)@30:31:39 01-20-2023:bv<br>
+F7110D(40476)@30:31:39 01-20-2023:cvb<br>
+F7110D(40476)@30:31:40 01-20-2023:b<br>
+server(S)@30:31:45 01-20-2023:67C5B2 has joined<br>
+server(S)@30:31:46 01-20-2023:67C5B2 is now known as 40476[linux]<br>
+67C5B2(40476[linux])@30:31:49 01-20-2023:1674214310027<br>
+server(S):@30:32:40 01-20-2023:72F0E5 has left<br>
+server(S):@30:32:46 01-20-2023:Θ40476[linux] has left<br>
+server(S)@30:34:25 01-20-2023:985834 has joined<br>
+server(S)@30:34:25 01-20-2023:985834 is now known as 40476[linux]<br>
+server(S):@30:35:24 01-20-2023:40476 has left<br>
+server(S)@30:35:26 01-20-2023:5FED8F has joined<br>
+server(S)@30:35:26 01-20-2023:5FED8F is now known as 40476<br>
+server(S)@30:35:53 01-20-2023:9F02F1 has joined<br>
+F09A17($@F09A17)@30:36:14 01-20-2023:s<br>
+F09A17($@F09A17)@30:36:14 01-20-2023:s<br>
+F09A17($@F09A17)@30:36:14 01-20-2023:s<br>
+F09A17($@F09A17)@30:36:19 01-20-2023:1674214579391<br>
+server(S)@30:36:19 01-20-2023:F09A17 is now known as $40476<br>
+server(S)@30:38:50 01-20-2023:7C6C88 has joined<br>
+server(S)@30:38:50 01-20-2023:7C6C88 is now known as 40476<br>

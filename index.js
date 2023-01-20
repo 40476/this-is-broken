@@ -11,7 +11,6 @@ ERROR:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><pre><b style="col
 FATAL:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><pre><b style="color:#ff0000;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[FATAL]>>>`+e+`</pre></b>\n`);}catch(e){};console.log('\x1b[31m'+e+'\x1b[0m');}
 }
 /*https://api.durrstudios.ga*/
-/**/
 try{
 const initTime=Date.now();
 const express=require('express');
@@ -65,6 +64,7 @@ function restart() {logger.FATAL('admin command trigger-> restart');process.on("
 function query(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets,defaults(db,!0);for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?ret:main}
 function linez(str){var str_arr = str.split('\n');var newline_length = str_arr.length;return newline_length;}
 function RemoveFirstLine(text){var lines = text.split('\n');lines.splice(0,1);return lines.join('\n');}
+function fixName(){try{socket.proto.name=socket.proto.name.replace('Θ','');}catch(e){logger.ERROR(e)}try{socket.proto.name=socket.proto.name.replace('$','');}catch(e){logger.ERROR(e)}try{socket.proto.name=socket.proto.name.replace('@','');}catch(e){logger.ERROR(e)}}
 function queryKeys(obj,and,db){let keys=Object.keys(obj),values=Object.values(obj),main={},ret={};db=db||io.of("/").sockets;for(let i in keys)i>0&&and?Object.keys(main).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>ret[el]=db[el])):Object.keys(db).filter((el=>db[el].proto[keys[i]]===values[i])).map((el=>main[el]=db[el]));return and?Object.keys(ret):Object.keys(main)}
   
 if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./public/chatlogs');setTimeout(function(){makeFolder('./public/chatlogs')},50);}
@@ -97,7 +97,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
       socket.emit('message',{
         platform:'nodeJS',
         name: 'server',
-        message: 'Welcome to BakChat The server you are currently on is '+config.server.name+'!<br> You are in room "'+socket.proto.room+'".<br>'+fs.readFileSync('assets/join_msg.html')+'<br>the owner of this server is <div id="owner">'+function(o){if(config.server.owner==='getfromreplit'){o=process.env.REPL_OWNER}return o}()+"</div>"
+        message: 'Welcome to BakChat The server you are currently on is '+config.server.name+'!<br> You are in room "'+socket.proto.room+'".<br>'+fs.readFileSync('assets/join_msg.html')+'<br>the owner of this server is <div id="owner">'+function(o){if(config.server.owner==='getfromreplit'){o=process.env.REPL_OWNER}else{o=config.server.owner}return o}()+"</div>"
       });
       if(config.DEVMODE){console.log(query({room:room}),socket.proto.room);}
       if (query({
@@ -176,7 +176,6 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
               if (selectedSocket){
                 selectedSocket.disconnect();
                 fs.writeFileSync('public/bans/'+message.split(' ')[1]+'.txt','banned');
-                // console.log(selectedSocket+'has been banned');
                 toRoom(room).emit('message',{name:'server',message:selectedSocket.proto.name+'has been banned'});
                 Tolog(room,'server(S)@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+`${selectedSocket.proto.name} has been banned`);
                 
@@ -455,7 +454,7 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
           case config.chat.commandprefix+'update':
             if(socket.proto.owner){
               /* if user is admin*/
-            //TODO: fetch updates from https://raw.githubusercontent.com/40476/BakChat/main/index.js
+            //TODO: fetch updates from https://raw.githubusercontent.com/40476/BakChat/main/
               logger.ERROR('not implemented')
             }else{}break;
 
@@ -612,11 +611,6 @@ if(config.rm_publicLogs_startup){makeFolder('./public/chatlogs');delFolder('./pu
             });
         }
       } else{
-        //       for (let i=0;i<cussWords.length;i++){
-        //         //https://www.npmjs.com/package/swearjar
-          
-        // }
-        // if(message.includes(config.chat.commandprefix+'key')!==true){
           if(true){
 
           /*LOGGING CODE*/Tolog(socket.proto.room,socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+"-"+date+"-"+year+''+':'+message);}else if(message.includes(config.chat.commandprefix+'key')!==true){Tolog(socket.proto.room,'---'+socket.proto.id+'('+socket.proto.name+')@'+hours+":"+minutes+":"+seconds+" "+month+'-'+date+'-'+year+''+':'+message);}
