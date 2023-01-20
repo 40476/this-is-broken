@@ -1,4 +1,6 @@
-const config = require('./sconfig.json');let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.offset;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
+const config = require('./sconfig.json');
+let date_ob=new Date();let date=("0" + date_ob.getDate()).slice(-2);let month=("0" + (date_ob.getMonth() + 1)).slice(-2);let year=date_ob.getFullYear();let hours=date_ob.getHours()-config.time.offset;let minutes=date_ob.getMinutes();let seconds=date_ob.getSeconds();
+setInterval(function(){ date_ob=new Date(); date=("0" + date_ob.getDate()).slice(-2); month=("0" + (date_ob.getMonth() + 1)).slice(-2); year=date_ob.getFullYear(); hours=date_ob.getHours()-config.time.offset; minutes=date_ob.getMinutes(); seconds=date_ob.getSeconds();},750);
 const fs=require('fs');
 const logger={
 trace:function(e){try{fs.appendFileSync(`./log/log.html`,`<br><pre><b style="color:#00ee00;background-color:#000000;font-family:monospace;">`+"["+month+"-"+date+"-"+year+"*"+hours+"."+minutes+"."+seconds+"]"+`[trace]>>>`+e+`</pre></b>\n`);}catch(e){};console.log('\x1b[32m'+e+'\x1b[0m');},
