@@ -50,13 +50,13 @@ background-color:#000;
 border-radius:var(--borderRad)
 }
 
-/* .log {
+.log {
 display:flex;
 overflow-y:scroll;
 flex-direction:column;
 flex-grow:1;
 overflow-wrap:break-word
-} */
+}
 
 .item {
 background-color:#bfd4f3;
