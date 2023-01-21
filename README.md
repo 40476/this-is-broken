@@ -1,5 +1,4 @@
-# i need help with update script (let me know in the discussions tab via github)
-
+# CURRENTLY BROKEN BECAUSE socket.io WONT CONNECT PROPERLY
 
 
 # BakChat version 1.6.5 command update

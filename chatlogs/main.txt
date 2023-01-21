@@ -73,3 +73,13 @@ server(S)@21:1:5 01-21-2023:34E9F7 is now known as 40476<br>
 34E9F7(40476)@21:1:15 01-21-2023:'<br>
 34E9F7(40476)@21:1:16 01-21-2023:'<br>
 34E9F7(40476)@21:1:16 01-21-2023:'<br>
+server(S):@36:47:42 01-21-2023:A5EDD5 has left<br>
+server(S):@36:47:45 01-21-2023:85984E has left<br>
+server(S):@36:47:51 01-21-2023:E14298 has left<br>
+server(S):@36:47:57 01-21-2023:5007A0 has left<br>
+server(S):@36:48:3 01-21-2023:D68171 has left<br>
+server(S):@36:48:9 01-21-2023:3782D2 has left<br>
+server(S):@36:48:15 01-21-2023:2D51BC has left<br>
+server(S):@36:48:21 01-21-2023:3EE39A has left<br>
+server(S):@36:48:27 01-21-2023:2C5F59 has left<br>
+server(S):@36:48:33 01-21-2023:D23569 has left<br>
